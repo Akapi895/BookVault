@@ -14,7 +14,6 @@ import java.util.Set;
 @AllArgsConstructor
 @Table(name = "BOOKS")
 public class Book {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

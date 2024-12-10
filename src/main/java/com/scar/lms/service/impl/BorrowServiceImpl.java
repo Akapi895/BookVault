@@ -27,21 +27,22 @@ public class BorrowServiceImpl implements BorrowService {
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     @Override
     public boolean isBookBorrowedBy(int userId, int bookId) {
+//        boolean returned =
         return borrowRepository.existsByUserIdAndBookId(userId, bookId);
     }
 
     @Async
     @Override
     public void addBorrow(Borrow borrow) {
-        if (borrowRepository.existsById(borrow.getId())) {
-            throw new OperationNotAllowedException("Unable to borrow book");
+        if (borrowRepository.existsByUserIdAndBookId(borrow.getUser().getId(), borrow.getBook().getId())) {
+            throw new OperationNotAllowedException("Book is already borrowed by the user.");
         }
         extractedAddBorrow(borrow);
     }
 
     private void extractedAddBorrow(Borrow borrow) {
-        borrowRepository.save(borrow);
         Book book = borrow.getBook();
+        borrowRepository.save(borrow);
         book.setBorrowCount(book.getBorrowCount() + 1);
         borrow.getUser().setPoints(borrow.getUser().getPoints() + 1);
     }
@@ -56,8 +57,10 @@ public class BorrowServiceImpl implements BorrowService {
     @Override
     public void removeBorrow(Borrow borrow) {
         if (!borrowRepository.existsById(borrow.getId())) {
-            throw new OperationNotAllowedException("Unable to remove book");
+            throw new OperationNotAllowedException("Unable to remove book.");
         }
+        Book book = borrow.getBook();
+        borrow.getUser().setPoints(borrow.getUser().getPoints() - 1);
         borrowRepository.delete(borrow);
     }
 
@@ -96,6 +99,8 @@ public class BorrowServiceImpl implements BorrowService {
         return CompletableFuture.supplyAsync(borrowRepository::count);
     }
 
+    @Async
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     @Override
     public CompletableFuture<Long> countBorrowsByUser(int userId) {
         return CompletableFuture.supplyAsync(() -> borrowRepository.countByUserId(userId));

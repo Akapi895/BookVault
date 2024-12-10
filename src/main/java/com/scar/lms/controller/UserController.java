@@ -1,6 +1,7 @@
 package com.scar.lms.controller;
 
 import com.scar.lms.entity.User;
+import com.scar.lms.exception.OperationNotAllowedException;
 import com.scar.lms.service.AuthenticationService;
 import com.scar.lms.service.BorrowService;
 import com.scar.lms.service.CloudStorageService;
@@ -86,6 +87,7 @@ public class UserController {
         }
     }
 
+    //profile
     @GetMapping({"/", ""})
     public String defaultUserPage() {
         return "redirect:/user/profile";
@@ -180,13 +182,19 @@ public class UserController {
         return getUser(authentication)
                 .thenCompose(user -> borrowService.findBorrow(user.getId(), bookId)
                         .thenAccept(borrowOptional -> {
-                            borrowOptional.ifPresent(borrow -> {
+                            borrowOptional.ifPresentOrElse(borrow -> {
                                 borrow.setReturnDate(LocalDate.now());
                                 borrowService.updateBorrow(borrow);
+                            }, () -> {
+                                // Trường hợp không tìm thấy mượn sách
+                                throw new OperationNotAllowedException("No borrow record found or book already returned");
                             });
                         })
                         .thenApply(v -> ResponseEntity.ok("Book returned successfully"))
-                        .exceptionally(ex -> ResponseEntity.status(500).body("Failed to return book")));
+                        .exceptionally(ex -> {
+                            log.error("Failed to return book", ex);
+                            return ResponseEntity.status(500).body("Failed to return bookkk");
+                        }));
     }
 
     @GetMapping("/borrowed-books")

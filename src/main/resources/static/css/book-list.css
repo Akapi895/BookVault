@@ -226,10 +226,12 @@ a:hover {
 
 .book-list {
     display: flex;
-    overflow: hidden;
+    overflow-x: auto;  /* Thay 'hidden' bằng 'auto' để hỗ trợ cuộn ngang */
+    overflow-y: hidden;
     flex-wrap: nowrap;
-    max-width: 1050px;
+    max-width: 100%;  /* Đảm bảo phần này có thể mở rộng tối đa theo chiều ngang */
     height: auto;
+    box-sizing: border-box;
 }
 
 .scroll-content {
@@ -237,12 +239,12 @@ a:hover {
     overflow-x: scroll;
     overflow-y: hidden;
     flex-wrap: nowrap;
-    max-width: 100%;
     gap: 20px;
     padding: 10px;
     box-sizing: border-box;
     scroll-behavior: smooth;
 }
+
 
 .scroll-content::-webkit-scrollbar {
     display: none;
@@ -354,6 +356,19 @@ a:hover {
     background-color: #818fff;
 }
 
+.return-btn {
+    background-color: #ff0000;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.return-btn:hover {
+    background-color: #cc0000;
+}
 
 .actions > i {
     color: #333;

@@ -11,9 +11,11 @@ import java.util.Optional;
 
 @Repository
 public interface BorrowRepository extends JpaRepository<Borrow, Integer> {
-
+    @Query("SELECT CASE WHEN COUNT(b) > 0 THEN true ELSE false END " +
+            "FROM Borrow b WHERE b.user.id = :userId AND b.book.id = :bookId AND b.returnDate IS NULL")
     boolean existsByUserIdAndBookId(int userId, int bookId);
 
+    @Query("SELECT b FROM Borrow b WHERE b.book.id = :bookId AND b.user.id = :userId AND b.returnDate IS NULL")
     Optional<Borrow> findByUserIdAndBookId(int userId, int bookId);
 
     List<Borrow> findAllByUserId(int userId);

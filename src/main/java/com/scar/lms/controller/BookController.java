@@ -265,6 +265,10 @@ public class BookController {
                     User user = userFuture.join();
                     Book book = bookFuture.join();
 
+                    if (borrowService.isBookBorrowedBy(user.getId(), book.getId())) {
+                        return ResponseEntity.badRequest().body("You have already borrowed this book.");
+                    }
+
                     extractedBorrowBook(user, book);
                     return ResponseEntity.ok("Book borrowed successfully");
                 })
