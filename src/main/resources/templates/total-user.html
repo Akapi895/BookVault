@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Page Title</title>
+    <title>Total Users</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/favourites.css">
@@ -21,39 +21,41 @@
 </head>
 <body>
 <div th:replace="~{frame-admin :: body}"></div>
+
 <div class="tabular-wrapper">
-    <h class="main-title" style="font-size: 60px;"><strong>TOTAL USER</strong></h>
+    <h class="main-title" style="font-size: 60px; font-family: Calibri"><strong>TOTAL USER</strong></h>
     <br>
     <div class="table-container">
         <table>
             <thead>
             <tr>
-                <th>ID</th>
-                <th>Username</th>
-                <th>Display name</th>
-                <th>Role</th>
+                <th style="text-align: center">ID</th>
+                <th style="text-align: center">Username</th>
+                <th style="text-align: center">Display name</th>
+                <th style="text-align: center">Role</th>
                 <th style="text-align: center">Edit</th>
                 <th style="text-align: center">Remove</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="user : ${users}">
-                <td th:text="${user.id}">a user id</td>
+                <td style="text-align: center" th:text="${user.id}">a user id</td>
                 <td th:text="${user.username}">a user username</td>
                 <td th:text="${user.displayName}">display name</td>
-                <td th:text="${user.role}">role</td>
-                <td>
+                <td style="text-align: center" th:text="${user.role}">role</td>
+                <td style="text-align: center">
                     <i class='bx bxs-edit edit-icon'
                        th:data-id="${user.id}"
                        th:data-username="${user.username}"
                        th:data-displayname="${user.displayName}"
                        th:data-role="${user.role}"></i>
                 </td>
-                <td><i class='bx bxs-trash delete-icon' th:data-id="${user.id}"></i></td>
+                <td style="text-align: center"><i class='bx bxs-trash delete-icon' th:data-id="${user.id}"></i></td>
             </tr>
             </tbody>
         </table>
     </div>
+
     <div class="modal-overlay-user" id="editUser">
         <div class="modal-user-box">
             <h3>Edit User</h3>
@@ -69,8 +71,10 @@
                 <label for="Role">Role:</label>
                 <input type="text" id="Role" name="role"/>
 
-                <button type="submit">Change</button>
-                <button type="button" id="closeModal">Cancel</button>
+                <div class="button-group">
+                    <button type="submit">Change</button>
+<!--                    <button type="button" id="closeModal">Cancel</button>-->
+                </div>
             </form>
         </div>
     </div>

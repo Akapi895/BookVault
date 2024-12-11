@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-
     const editIcons = document.querySelectorAll('.edit-icon');
     const deleteIcons = document.querySelectorAll('.delete-icon');
     const editUserModal = document.getElementById('editUser');
-    const closeModal = document.getElementById('closeModal');
+    const closeModalButton = document.getElementById('closeModal');
+    const userForm = document.getElementById('user-list');
 
+    // Xử lý khi ấn Edit
     editIcons.forEach((icon) => {
         icon.addEventListener('click', () => {
             const userId = icon.getAttribute('data-id');
@@ -21,14 +22,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    if (closeModal) {
-        closeModal.addEventListener('click', () => {
+    // Xử lý khi ấn Cancel
+    if (closeModalButton) {
+        closeModalButton.addEventListener('click', () => {
             editUserModal.style.display = 'none';
         });
-    } else {
-        console.error('Cancel button (closeModal) not found.');
     }
 
+    // Xử lý khi ấn Delete
     deleteIcons.forEach((icon) => {
         icon.addEventListener('click', () => {
             const userId = icon.getAttribute('data-id');
@@ -39,64 +40,70 @@ document.addEventListener('DOMContentLoaded', () => {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
                 })
-                .then(response => {
-                    if (response.ok) {
-                        alert('User deleted successfully!');
-                        location.reload();
-                    } else {
+                    .then(response => {
+                        if (response.ok) {
+                            alert('User deleted successfully!');
+                            location.reload();
+                        } else {
+                            alert('Failed to delete user.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
                         alert('Failed to delete user.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Failed to delete user.');
-                });
-            } else {
-                console.error('User ID is null or undefined.');
+                    });
             }
         });
     });
 
-    const userForm = document.getElementById('user-list');
-    userForm.addEventListener('submit', (e) => {
-        e.preventDefault();
+    // Xử lý Submit form chỉnh sửa
+    if (userForm) {
+        userForm.addEventListener('submit', (e) => {
+            e.preventDefault();
 
-        const userId = document.getElementById('userId').value;
-        const username = document.getElementById('Username').value;
-        const displayName = document.getElementById('Display-name').value;
-        const role = document.getElementById('Role').value;
+            const userId = document.getElementById('userId').value;
+            const username = document.getElementById('Username').value;
+            const displayName = document.getElementById('Display-name').value;
+            const role = document.getElementById('Role').value;
 
-        fetch('/admin/user/update', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: new URLSearchParams({
-                id: userId,
-                username: username,
-                displayName: displayName,
-                role: role
+            fetch('/admin/user/update', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    id: userId,
+                    username: username,
+                    displayName: displayName,
+                    role: role
+                })
             })
-        })
-            .then(response => {
-                if (response.ok) {
-                    return response.text();
-                } else {
-                    return response.text().then(errMessage => {
-                        throw new Error(errMessage);
-                    });
-                }
-            })
-            .then(message => {
-                alert(message);
-                location.reload();
-            })
-            .catch(error => {
-                console.error('Error:', error.message);
-                alert(`An error occurred: ${error.message}`);
-            });
+                .then(response => {
+                    if (response.ok) {
+                        return response.text();
+                    } else {
+                        return response.text().then(errMessage => {
+                            throw new Error(errMessage);
+                        });
+                    }
+                })
+                .then(message => {
+                    alert(message);
+                    location.reload();
+                })
+                .catch(error => {
+                    console.error('Error:', error.message);
+                    alert(`An error occurred: ${error.message}`);
+                });
 
-        document.getElementById('editUser').style.display = 'none';
+            editUserModal.style.display = 'none';
+        });
+    }
+
+    // Xử lý khi click bên ngoài modal để tắt
+    window.addEventListener('click', (event) => {
+        if (event.target === editUserModal) {
+            editUserModal.style.display = 'none';
+        }
     });
-
 });

@@ -36,7 +36,7 @@
             </a>
         </li>
         <li class="nav__item" data-tooltip="Total-user">
-            <a href="/admin/total-user">
+            <a href="/admin/users">
                 <i class='bx bxs-user-rectangle' ></i>
             </a>
         </li>
@@ -93,7 +93,7 @@
             </div>
             <div class="card">
                 <div class="content">
-                    <p class="number" th:text="${userCount}">30</p>
+                    <p class="number" th:text="${userCount} - ${adminCount}">30</p>
                     <p class="label">Total users</p>
                 </div>
                 <button class="btn">Click</button>

@@ -11,6 +11,8 @@ import java.util.Optional;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Integer>, JpaSpecificationExecutor<Book> {
+    @Query("SELECT b FROM Book b")
+    List<Book> findAll();
 
     List<Book> findByTitle(String title);
 

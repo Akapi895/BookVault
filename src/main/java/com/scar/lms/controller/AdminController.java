@@ -1,5 +1,6 @@
 package com.scar.lms.controller;
 
+import com.scar.lms.entity.Role;
 import com.scar.lms.entity.User;
 import com.scar.lms.model.NotificationDTO;
 import com.scar.lms.service.AuthenticationService;
@@ -104,30 +105,62 @@ public class AdminController {
                 });
     }
 
+//    @PostMapping("/user/update")
+//    public CompletableFuture<ResponseEntity<String>> updateUser(
+//            @Valid @ModelAttribute("user") User user,
+//            BindingResult result) {
+//        if (result.hasErrors()) {
+//            return CompletableFuture.completedFuture(
+//                    ResponseEntity.badRequest().body("Validation failed: " + result.getFieldErrors())
+//            );
+//        }
+//
+//        return userService.findUserById(user.getId())
+//                .thenApply(existingUser -> {
+//                    if (existingUser != null) {
+//                        existingUser.setDisplayName(user.getDisplayName());
+//                        existingUser.setEmail(user.getEmail());
+//
+//                        try {
+//                            existingUser.setRole(user.getRole());
+//                        } catch (IllegalArgumentException e) {
+//                            return ResponseEntity.badRequest().body("Invalid role: " + user.getRole());
+//                        }
+//
+//                        userService.updateUser(existingUser);
+//
+//                        return ResponseEntity.ok("User updated successfully");
+//                    } else {
+//                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+//                    }
+//                })
+//                .exceptionally(e -> {
+//                    log.error("Failed to update user.", e);
+//                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                            .body("Failed to update user due to an error");
+//                });
+//    }
+
     @PostMapping("/user/update")
     public CompletableFuture<ResponseEntity<String>> updateUser(
-            @Valid @ModelAttribute("user") User user,
-            BindingResult result) {
-        if (result.hasErrors()) {
-            return CompletableFuture.completedFuture(
-                    ResponseEntity.badRequest().body("Validation failed: " + result.getFieldErrors())
-            );
-        }
+            @RequestParam("id") Integer id,
+            @RequestParam("username") String username,
+            @RequestParam("displayName") String displayName,
+            @RequestParam("role") String role) {
 
-        return userService.findUserById(user.getId())
+        return userService.findUserById(id)
                 .thenApply(existingUser -> {
                     if (existingUser != null) {
-                        existingUser.setDisplayName(user.getDisplayName());
-                        existingUser.setEmail(user.getEmail());
-
+                        // Cập nhật dữ liệu người dùng
+                        existingUser.setUsername(username);
+                        existingUser.setDisplayName(displayName);
                         try {
-                            existingUser.setRole(user.getRole());
+                            existingUser.setRole(Role.valueOf(role.toUpperCase()));
                         } catch (IllegalArgumentException e) {
-                            return ResponseEntity.badRequest().body("Invalid role: " + user.getRole());
+                            return ResponseEntity.badRequest().body("Invalid role: " + role);
                         }
 
                         userService.updateUser(existingUser);
-
                         return ResponseEntity.ok("User updated successfully");
                     } else {
                         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
@@ -139,6 +172,7 @@ public class AdminController {
                             .body("Failed to update user due to an error");
                 });
     }
+
 
     @PostMapping("/user/delete/{userId}")
     public String deleteUser(@PathVariable int userId, RedirectAttributes redirectAttributes) {

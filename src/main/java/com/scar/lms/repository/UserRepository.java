@@ -11,6 +11,8 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
+    @Query("SELECT b FROM User b WHERE b.role = 0")
+    List<User> findAll();
 
     @Query("SELECT u FROM User u WHERE u.username LIKE %?1%")
     List<User> searchUsers(String username);
