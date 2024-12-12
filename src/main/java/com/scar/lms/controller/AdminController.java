@@ -68,21 +68,57 @@ public class AdminController {
                 });
     }
 
-    @GetMapping("/books")
+//    @GetMapping("/books")
+//    public CompletableFuture<String> listAllBooks(Model model) {
+//        return bookService.findAllBooks()
+//                .thenApply(books -> {
+//                    if (books == null) {
+//                        model.addAttribute("error", "Books not found.");
+//                        return "error/404";
+//                    } else {
+//                        model.addAttribute("books", books);
+//                        return "book-list";
+//                    }
+//                })
+//                .exceptionally(e -> {
+//                    log.error("Failed to fetch books.", e);
+//                    model.addAttribute("error", "Failed to fetch books.");
+//                    return "error/404";
+//                });
+//    }
+
+    @GetMapping("/total-book")
     public CompletableFuture<String> listAllBooks(Model model) {
         return bookService.findAllBooks()
                 .thenApply(books -> {
                     if (books == null) {
                         model.addAttribute("error", "Books not found.");
                         return "error/404";
-                    } else {
-                        model.addAttribute("books", books);
-                        return "book-list";
                     }
+                    model.addAttribute("books", books);
+                    return "total-book";
                 })
                 .exceptionally(e -> {
                     log.error("Failed to fetch books.", e);
                     model.addAttribute("error", "Failed to fetch books.");
+                    return "error/404";
+                });
+    }
+
+    @GetMapping("/total-borrow")
+    public CompletableFuture<String> listAllBorrows(Model model) {
+        return borrowService.findAllBorrows()
+                .thenApply(borrows -> {
+                    if (borrows == null) {
+                        model.addAttribute("error", "Borrows not found.");
+                        return "error/404";
+                    }
+                    model.addAttribute("borrows", borrows);
+                    return "total-borrow";
+                })
+                .exceptionally(e -> {
+                    log.error("Failed to fetch borrows.", e);
+                    model.addAttribute("error", "Failed to fetch borrows.");
                     return "error/404";
                 });
     }
@@ -141,6 +177,28 @@ public class AdminController {
 //                });
 //    }
 
+    @GetMapping("/admin-profile")
+    public CompletableFuture<String> showAdminProfilePage(Model model, Authentication authentication) {
+        if (authentication == null) {
+            return CompletableFuture.completedFuture("redirect:/login");
+        }
+
+        return authenticationService.getAuthenticatedUser(authentication)
+                .thenApply(admin -> {
+                    if (admin == null) {
+                        model.addAttribute("error", "Admin not found or unauthorized.");
+                        return "error/404";
+                    }
+
+                    model.addAttribute("admin", admin);
+                    model.addAttribute("userCount", userService.countAllUsers().join());
+                    model.addAttribute("bookCount", bookService.countAllBooks().join());
+                    return "admin-profile";
+                });
+    }
+
+    @GetMapping("/")
+
     @PostMapping("/user/update")
     public CompletableFuture<ResponseEntity<String>> updateUser(
             @RequestParam("id") Integer id,
@@ -183,6 +241,28 @@ public class AdminController {
             redirectAttributes.addFlashAttribute("errorMessage", "Failed to delete user.");
         }
         return "redirect:/admin/users";
+    }
+
+    @PostMapping("/remove/{bookId}")
+    public String deleteBook(@PathVariable int bookId, RedirectAttributes redirectAttributes) {
+        try {
+            bookService.deleteBook(bookId);
+            redirectAttributes.addFlashAttribute("successMessage", "Book deleted successfully.");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Failed to delete book.");
+        }
+        return "redirect:/admin/total-book";
+    }
+
+    @PostMapping("/borrow-remove/{borrowId}")
+    public String deleteBorrow(@PathVariable int borrowId, RedirectAttributes redirectAttributes) {
+        try {
+            borrowService.removeBorrow(borrowId);
+            redirectAttributes.addFlashAttribute("successMessage", "Book deleted successfully.");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Failed to delete book.");
+        }
+        return "redirect:/admin/total-borrow";
     }
 
     @PostMapping("/user/new")

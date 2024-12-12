@@ -55,10 +55,11 @@ public class BorrowServiceImpl implements BorrowService {
 
     @Async
     @Override
-    public void removeBorrow(Borrow borrow) {
-        if (!borrowRepository.existsById(borrow.getId())) {
+    public void removeBorrow(int borrowID) {
+        if (!borrowRepository.existsById(borrowID)) {
             throw new OperationNotAllowedException("Unable to remove book.");
         }
+        Borrow borrow = borrowRepository.findById(borrowID).get();
         Book book = borrow.getBook();
         borrow.getUser().setPoints(borrow.getUser().getPoints() - 1);
         borrowRepository.delete(borrow);

@@ -15,69 +15,97 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 </head>
-<body>
-<header th:replace="~{frame :: header}"></header>
-<nav>
-    <ul class="nav__list">
-        <li class="nav__item" data-tooltip="Home">
-<!--            <a href="/books/search">-->
-            <a href="/admin">
-                <i class='bx bx-home-alt'></i>
-            </a>
-        </li>
-        <li class="nav__item" data-tooltip="Total-book">
-            <a href="/admin/total-book">
-                <i class='bx bx-book'></i>
-            </a>
-        </li>
-        <li class="nav__item" data-tooltip="Total-borrow">
-            <a href="/admin/total-borrow">
-                <i class='bx bx-book-alt'></i>
-            </a>
-        </li>
-        <li class="nav__item" data-tooltip="Total-user">
-            <a href="/admin/users">
-                <i class='bx bxs-user-rectangle'></i>
-            </a>
-        </li>
-        <li class="nav__item icon-container" id="addBookIcon" data-tooltip="Add-book">
-            <a href="/admin">
-                <i class='bx bx-book-add'></i>
-            </a>
-        </li>
-        <li class="nav__item" data-tooltip="Account">
-            <a href="/users/profile">
-                <i class='bx bx-user-circle'></i>
-            </a>
-        </li>
-        <li class="nav__item" data-tooltip="Logout">
-            <a href="/logout">
-                <i class='bx bx-log-out'></i>
-            </a>
-        </li>
-    </ul>
-    <div class="modal-overlay" id="addBookModal">
-        <div class="modal-box">
-            <h3>Add New Book</h3>
-            <form id="addBookForm">
-                <label for="bookId">Book ID:</label>
-                <input type="text" id="bookId" name="bookId" required/>
+    <body>
+        <header class="headpage">
+            <ul class="navmenu">
+                <li><a href="/admin">HOME</a></li>
+                <li><a href="/admin/total-book">BOOKS</a></li>
+                <li><a href="/admin/users">USERS</a></li>
+                <li><a href="/admin/total-borrow">BORROWS</a></li>
+            </ul>
 
-                <label for="bookTitle">Title:</label>
-                <input type="text" id="bookTitle" name="bookTitle" required/>
+            <ul class="navmenu" style="display: flex; align-items: center; gap: 0; list-style: none; padding: 0; margin: 0;">
+                <li style="display: flex; align-items: center; gap: 2px;">
+                    <input
+                            type="text"
+                            id="searchBook"
+                            placeholder="Search books..."
+                            style="
+                        padding: 5px 10px;
+                        font-size: 14px;
+                        border: 1px solid #ccc;
+                        border-radius: 5px;
+                        width: 200px;
+                        height: 40px;
+                    "
+                    >
+                    <a href="#" style="display: flex; align-items: center;">
+                        <i class='bx bx-search' style="transform: scale(1.5);"></i>
+                    </a>
+                </li>
+                <li><a href="/admin/admin-profile"><i class='bx bx-user-circle' style="transform: scale(1.5);"></i></a></li>
+            </ul>
+        </header>
+        <nav>
+        <ul class="nav__list">
+            <li class="nav__item" data-tooltip="Home">
+                <a href="/admin">
+                    <i class='bx bx-home-alt'></i>
+                </a>
+            </li>
+            <li class="nav__item" data-tooltip="Total-book">
+                <a href="/admin/total-book">
+                    <i class='bx bx-book'></i>
+                </a>
+            </li>
+            <li class="nav__item" data-tooltip="Total-borrow">
+                <a href="/admin/total-borrow">
+                    <i class='bx bx-book-alt'></i>
+                </a>
+            </li>
+            <li class="nav__item" data-tooltip="Total-user">
+                <a href="/admin/users">
+                    <i class='bx bxs-user-rectangle'></i>
+                </a>
+            </li>
+            <li class="nav__item icon-container" id="addBookIcon" data-tooltip="Add-book">
+                <a href="/admin">
+                    <i class='bx bx-book-add'></i>
+                </a>
+            </li>
+            <li class="nav__item" data-tooltip="Account">
+                <a href="/admin/admin-profile">
+                    <i class='bx bx-user-circle'></i>
+                </a>
+            </li>
+            <li class="nav__item" data-tooltip="Logout">
+                <a href="/logout">
+                    <i class='bx bx-log-out'></i>
+                </a>
+            </li>
+        </ul>
+        <div class="modal-overlay" id="addBookModal">
+            <div class="modal-box">
+                <h3>Add New Book</h3>
+                <form id="addBookForm">
+                    <label for="bookId">Book ID:</label>
+                    <input type="text" id="bookId" name="bookId" required/>
 
-                <label for="bookGenres">Genres:</label>
-                <input type="text" id="bookGenres" name="bookGenres" required/>
+                    <label for="bookTitle">Title:</label>
+                    <input type="text" id="bookTitle" name="bookTitle" required/>
 
-                <label for="bookImage">Image:</label>
-                <input type="file" id="bookImage" name="bookImage" accept="image/*"/>
+                    <label for="bookGenres">Genres:</label>
+                    <input type="text" id="bookGenres" name="bookGenres" required/>
 
-                <button type="submit">Add to List</button>
-                <button type="button" id="closeModal">Cancel</button>
-            </form>
+                    <label for="bookImage">Image:</label>
+                    <input type="file" id="bookImage" name="bookImage" accept="image/*"/>
+
+                    <button type="submit">Add to List</button>
+                    <button type="button" id="closeModal">Cancel</button>
+                </form>
+            </div>
         </div>
-    </div>
-    <script src="/js/addbook.js"></script>
-</nav>
-</body>
+        <script src="/js/addbook.js"></script>
+    </nav>
+    </body>
 </html>
