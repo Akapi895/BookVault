@@ -41,23 +41,29 @@
         <table>
             <thead>
             <tr>
-                <th>ID</th>
-                <th>Book Title</th>
-                <th>Borrowed Date</th>
-                <th>Returned Date</th>
-                <th>Status</th>
-                <th>Action</th>
+                <th style="text-align: center;">ID</th>
+                <th style="text-align: center;">Book Title</th>
+                <th style="text-align: center;">Borrowed Date</th>
+                <th style="text-align: center;">Returned Date</th>
+                <th style="text-align: center;">Status</th>
+                <th style="text-align: center;">Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="borrow : ${borrowHistory}">
-                <td th:text="${borrow.id}"></td>
-                <td th:text="${borrow.book != null ? borrow.book.title : 'Unknown'}"></td>
-                <td th:text="${borrow.borrowDate}"></td>
-                <td th:text="${borrow.returnDate}"></td>
-                <td th:style="${borrow.returnDate == null ? 'color: red;' : 'color: green;'}"
-                    th:text="${borrow.returnDate == null ? 'Not Returned' : 'Returned'}"></td>
-                <td>
+            <tr th:each="borrow, iterStat : ${borrowHistory}">
+                <td style="text-align: center;" th:text="${iterStat.count}"></td>
+                <td th:onclick="'window.location.href = \'/books/' + ${borrow.book.id} + '\''"
+                    class="book-page-btn"
+                    style="cursor: pointer;"
+                    th:text="${borrow.book != null ? borrow.book.title : 'Unknown'}">
+                </td>
+                <td style="text-align: center;" th:text="${borrow.borrowDate}"></td>
+                <td style="text-align: center;" th:text="${borrow.returnDate != null ? borrow.returnDate : 'N/A'}"></td>
+                <td style="text-align: center;"
+                    th:style="${borrow.returnDate == null ? 'color: red; text-align: center;' : 'color: green; text-align: center;'}"
+                    th:text="${borrow.returnDate == null ? 'Not Returned' : 'Returned'}">
+                </td>
+                <td style="text-align: center;">
                     <button class="return-button" th:if="${borrow.returnDate == null}"
                             th:attr="onclick=|returnBook(${borrow.book.id})|">
                         Return Book
