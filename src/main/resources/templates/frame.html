@@ -19,6 +19,7 @@
     <script src="/js/frame.js"></script>
 </head>
 <body>
+<div th:fragment="body">
         <header class="headpage">
             <ul class="navmenu">
                 <li><a href="/books">HOME</a></li>
@@ -40,14 +41,13 @@
                 height: 40px;
             "
                     >
-                    <a href="#" style="display: flex; align-items: center;">
+                    <a href="#" id="searchBtn" style="display: flex; align-items: center;">
                         <i class='bx bx-search' style="transform: scale(1.5);"></i>
                     </a>
                 </li>
                 <li><a href="/users/profile"><i class='bx bx-user-circle' style="transform: scale(1.5);"></i></a></li>
             </ul>
         </header>
-
         <nav>
             <ul class="nav__list">
                 <li class="nav__item" data-tooltip="Home">
@@ -86,17 +86,42 @@
                 </li>
             </ul>
             <div th:replace="~{chat :: body}"></div>
-            <script>
-                // JavaScript code to handle toggle
+        </nav>
+        <script src="/js/frame.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Chat functionality
                 const chatButton = document.querySelector('.nav__item[data-tooltip="Chat"]');
                 const chatContainer = document.querySelector('.chat-container');
 
                 chatButton.addEventListener('click', () => {
                     chatContainer.classList.toggle('active');
                 });
-            </script>
 
-        </nav>
-        <script src="/js/frame.js"></script>
+                // Search functionality
+                const searchInput = document.getElementById('searchBook');
+                const searchBtn = document.getElementById('searchBtn');
+
+                function handleSearch() {
+                    const query = searchInput.value;
+                    if (query.trim()) {
+                        window.location.href = `/books/search?query=${encodeURIComponent(query)}`;
+                    }
+                }
+
+                searchInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        handleSearch();
+                    }
+                });
+
+                searchBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    handleSearch();
+                });
+            });
+        </script>
+</div>
 </body>
 </html>

@@ -496,7 +496,8 @@ button[type="submit"]:hover {
     background-color: #4cae4c;
 }
 
-.bx-heart.favorited {
+.bx-heart.favorited,
+.favorite-active {
     color: red;
 }
 

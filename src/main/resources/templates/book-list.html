@@ -22,9 +22,8 @@
 </head>
 <body>
 
-<header th:replace="~{frame :: header}"></header>
-<nav th:replace="~{frame :: nav}"></nav>
-  
+<div th:replace="~{frame :: body}"></div>
+
 <div class="container-main">
     <section class="display-main">
         <h2>Top 10</h2> <br>
@@ -62,7 +61,7 @@
     <section id="comics" class="display-main">
         <h2>Comics</h2>
         <div class="book-list">
-            <button class="scroll-btn left" onclick="scrollLeft()">❮</button>
+            <button class="scroll-btn left" onclick="scrollLeft('comics')">❮</button>
             <div class="scroll-content">
                 <div class="book-item" th:each="book : ${books}" th:if="${book.genre == 'Comics'}" th:attr="data-book-id=${book.id}">
                     <div class="tile">
@@ -80,14 +79,14 @@
                     </div>
                 </div>
             </div>
-            <button class="scroll-btn right" onclick="scrollRight()">❯</button>
+            <button class="scroll-btn right" onclick="scrollRight('comics')">❯</button>
         </div>
     </section>
 
     <section id="romantic" class="display-main">
         <h2>Romantic</h2>
         <div class="book-list">
-            <button class="scroll-btn left" onclick="scrollLeft()">❮</button>
+            <button class="scroll-btn left" onclick="scrollLeft('romantic')">❮</button>
             <div class="scroll-content">
                 <div class="book-item" th:each="book : ${books}" th:if="${book.genre == 'Romantic'}" th:attr="data-book-id=${book.id}">
                     <div class="tile">
@@ -105,14 +104,14 @@
                     </div>
                 </div>
             </div>
-            <button class="scroll-btn right" onclick="scrollRight()">❯</button>
+            <button class="scroll-btn right" onclick="scrollRight('romantic')">❯</button>
         </div>
     </section>
 
     <section id="novels" class="display-main">
         <h2>Novels</h2>
         <div class="book-list">
-            <button class="scroll-btn left" onclick="scrollLeft()">❮</button>
+            <button class="scroll-btn left" onclick="scrollLeft('novels')">❮</button>
             <div class="scroll-content">
                 <div class="book-item" th:each="book : ${books}" th:if="${book.genre == 'Novels'}" th:attr="data-book-id=${book.id}">
                     <div class="tile">
@@ -130,14 +129,14 @@
                     </div>
                 </div>
             </div>
-            <button class="scroll-btn right" onclick="scrollRight()">❯</button>
+            <button class="scroll-btn right" onclick="scrollRight('novels')">❯</button>
         </div>
     </section>
 
     <section id="action" class="display-main">
         <h2>Action</h2>
         <div class="book-list">
-            <button class="scroll-btn left" onclick="scrollLeft()">❮</button>
+            <button class="scroll-btn left" onclick="scrollLeft('action')">❮</button>
             <div class="scroll-content">
                 <div class="book-item" th:each="book : ${books}" th:if="${book.genre == 'Action'}" th:attr="data-book-id=${book.id}">
                     <div class="tile">
@@ -155,14 +154,14 @@
                     </div>
                 </div>
             </div>
-            <button class="scroll-btn right" onclick="scrollRight()">❯</button>
+            <button class="scroll-btn right" onclick="scrollRight('action')">❯</button>
         </div>
     </section>
 
     <section id="literature" class="display-main">
         <h2>Literature</h2>
         <div class="book-list">
-            <button class="scroll-btn left" onclick="scrollLeft()">❮</button>
+            <button class="scroll-btn left" onclick="scrollLeft('literature')">❮</button>
             <div class="scroll-content">
                 <div class="book-item" th:each="book : ${books}" th:if="${book.genre == 'Literature'}" th:attr="data-book-id=${book.id}">
                     <div class="tile">
@@ -180,14 +179,14 @@
                     </div>
                 </div>
             </div>
-            <button class="scroll-btn right" onclick="scrollRight()">❯</button>
+            <button class="scroll-btn right" onclick="scrollRight('literature')">❯</button>
         </div>
     </section>
 
     <section id="technology" class="display-main">
         <h2>Technology</h2>
         <div class="book-list">
-            <button class="scroll-btn left" onclick="scrollLeft()">❮</button>
+            <button class="scroll-btn left" onclick="scrollLeft('technology')">❮</button>
             <div class="scroll-content">
                 <div class="book-item" th:each="book : ${books}" th:if="${book.genre == 'Technology'}" th:attr="data-book-id=${book.id}">
                     <div class="tile">
@@ -205,7 +204,7 @@
                     </div>
                 </div>
             </div>
-            <button class="scroll-btn right" onclick="scrollRight()">❯</button>
+            <button class="scroll-btn right" onclick="scrollRight('technology')">❯</button>
         </div>
     </section>
 </div>

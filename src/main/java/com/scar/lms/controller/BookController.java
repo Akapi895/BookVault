@@ -75,6 +75,7 @@ public class BookController {
 
     @GetMapping("/search")
     public CompletableFuture<String> searchBooks(Model model,
+                                                 @RequestParam(required = false) String query,
                                                  @RequestParam(required = false) String title,
                                                  @RequestParam(required = false) String authorName,
                                                  @RequestParam(required = false) String genreName,
@@ -84,8 +85,13 @@ public class BookController {
                                                  @RequestParam(defaultValue = "8") int size) {
 
         Pageable pageable = PageRequest.of(page, size);
-        CompletableFuture<Page<Book>> booksFuture = bookService.findFiltered(
-                title, authorName, genreName, publisherName, year, pageable);
+        CompletableFuture<Page<Book>> booksFuture;
+
+        if (query != null && !query.trim().isEmpty()) {
+            booksFuture = bookService.searchBooks(query, pageable);
+        } else {
+            booksFuture = bookService.findFiltered(title, authorName, genreName, publisherName, year, pageable);
+        }
 
         CompletableFuture<List<Book>> topBorrowedBooksFuture = bookService.findTopBorrowedBooks();
         CompletableFuture<Long> totalBooksFuture = bookService.countAllBooks();
@@ -95,9 +101,15 @@ public class BookController {
                     try {
                         Page<Book> bookPage = booksFuture.get();
                         model.addAttribute("books", bookPage.getContent());
-                        model.addAttribute("currentPage", bookPage.getNumber() + 1);
+                        model.addAttribute("currentPage", bookPage.getNumber());  // Remove +1
                         model.addAttribute("totalPages", bookPage.getTotalPages());
                         model.addAttribute("booksPerPage", bookPage.getSize());
+                        model.addAttribute("query", query);  // Important: preserve query
+                        model.addAttribute("title", title);  // Add these if needed
+                        model.addAttribute("authorName", authorName);
+                        model.addAttribute("genreName", genreName);
+                        model.addAttribute("publisherName", publisherName);
+                        model.addAttribute("year", year);
                         model.addAttribute("top", topBorrowedBooksFuture.get());
                         model.addAttribute("count", totalBooksFuture.get());
                     } catch (Exception e) {

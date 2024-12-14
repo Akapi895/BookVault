@@ -41,4 +41,6 @@ public interface BookService {
     CompletableFuture<Long> countAllBooks();
 
     CompletableFuture<List<Book>> findBooksByGenre(String genre);
+
+    CompletableFuture<Page<Book>> searchBooks(String query, Pageable pageable);
 }

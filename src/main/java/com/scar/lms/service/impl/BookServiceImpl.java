@@ -175,4 +175,10 @@ public class BookServiceImpl implements BookService {
     public CompletableFuture<List<Book>> findBooksByGenre(String genre) {
         return CompletableFuture.supplyAsync(() -> bookRepository.findByGenre(genre));
     }
+
+    @Async
+    @Override
+    public CompletableFuture<Page<Book>> searchBooks(String query, Pageable pageable) {
+        return CompletableFuture.supplyAsync(() -> bookRepository.findByTitleContainingIgnoreCase(query, pageable));
+    }
 }
