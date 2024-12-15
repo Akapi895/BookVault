@@ -19,7 +19,7 @@
     <script src="/js/frame.js"></script>
 </head>
 <body>
-<div th:fragment="body">
+<!--<div th:fragment="body">-->
         <header class="headpage">
             <ul class="navmenu">
                 <li><a href="/books">HOME</a></li>
@@ -33,13 +33,13 @@
                             id="searchBook"
                             placeholder="Search books..."
                             style="
-                padding: 5px 10px;
-                font-size: 14px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                width: 200px;
-                height: 40px;
-            "
+            padding: 5px 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+            height: 40px;
+        "
                     >
                     <a href="#" id="searchBtn" style="display: flex; align-items: center;">
                         <i class='bx bx-search' style="transform: scale(1.5);"></i>
@@ -70,8 +70,10 @@
                         <i class='bx bx-bot'></i>
                     </a>
                 </li>
-                <li class="nav__item" data-tooltip="Chat">
-                    <i class='bx bx-chat'></i>
+                <li class="nav__item" data-tooltip="Game">
+                    <a href="/game">
+                        <i class='bx bx-game'></i>
+                    </a>
                 </li>
                 <br>
                 <li class="nav__item" data-tooltip="Account">
@@ -90,38 +92,38 @@
         <script src="/js/frame.js"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                // Chat functionality
-                const chatButton = document.querySelector('.nav__item[data-tooltip="Chat"]');
-                const chatContainer = document.querySelector('.chat-container');
-
-                chatButton.addEventListener('click', () => {
-                    chatContainer.classList.toggle('active');
-                });
+                // // Chat functionality
+                // const chatButton = document.querySelector('.nav__item[data-tooltip="Chat"]');
+                // const chatContainer = document.querySelector('.chat-container');
+                //
+                // chatButton.addEventListener('click', () => {
+                //     chatContainer.classList.toggle('active');
+                // });
 
                 // Search functionality
                 const searchInput = document.getElementById('searchBook');
                 const searchBtn = document.getElementById('searchBtn');
 
-                function handleSearch() {
-                    const query = searchInput.value;
-                    if (query.trim()) {
+                function performSearch() {
+                    const query = searchInput.value.trim();
+                    if (query) {
                         window.location.href = `/books/search?query=${encodeURIComponent(query)}`;
                     }
                 }
 
-                searchInput.addEventListener('keydown', function(e) {
+                searchInput.addEventListener('keypress', function(e) {
                     if (e.key === 'Enter') {
                         e.preventDefault();
-                        handleSearch();
+                        performSearch();
                     }
                 });
 
                 searchBtn.addEventListener('click', function(e) {
                     e.preventDefault();
-                    handleSearch();
+                    performSearch();
                 });
             });
         </script>
-</div>
+<!--</div>-->
 </body>
 </html>

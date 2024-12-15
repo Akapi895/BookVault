@@ -22,8 +22,11 @@
 
 <body>
 <div th:replace="~{frame :: body}"></div>
+<div th:replace="~{frame :: nav}"></div>
+
 <div class="container-search">
     <section class="display-filter">
+        <!-- Uncomment and fix search form -->
 <!--        <form th:action="@{/books/search}" method="get" class="search-filter-box">-->
 <!--            <label>-->
 <!--                <input type="text" name="title" th:value="${title}" class="search-filter-txt" placeholder="Title">-->
@@ -37,7 +40,7 @@
 <!--            <label>-->
 <!--                <input type="text" name="year" th:value="${year}" class="search-filter-txt" placeholder="Year">-->
 <!--            </label>-->
-<!--            <button type="submit" style="background: none; border: none; cursor: pointer;">-->
+<!--            <button type="submit" class="search-btn">-->
 <!--                <i class='bx bx-search'></i>-->
 <!--            </button>-->
 <!--        </form>-->

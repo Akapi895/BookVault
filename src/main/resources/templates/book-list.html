@@ -23,6 +23,7 @@
 <body>
 
 <div th:replace="~{frame :: body}"></div>
+<div th:replace="~{frame :: nav}"></div>
 
 <div class="container-main">
     <section class="display-main">
@@ -37,7 +38,10 @@
                             <img th:src="${book.imageUrl}" th:alt="${book.title}">
                         </a>
                         <div class="details">
-                            <p class="info" th:text="${book.title}">Book Title</p>
+                            <p class="info"
+                               th:onclick="'window.location.href = \'/books/' + ${book.id} + '\''"
+                               style="cursor: pointer;"
+                               th:text="${book.title}">Book Title</p>
                         </div>
                     </div>
                     <div class="actions">
@@ -65,11 +69,15 @@
             <div class="scroll-content">
                 <div class="book-item" th:each="book : ${books}" th:if="${book.genre == 'Comics'}" th:attr="data-book-id=${book.id}">
                     <div class="tile">
+                        <span class="book-number"></span>
                         <a th:href="@{/books/{bookId}(bookId=${book.id})}">
                             <img th:src="${book.imageUrl}" th:alt="${book.title}">
                         </a>
                         <div class="details">
-                            <p class="info" th:text="${book.title}">Book Title</p>
+                            <p class="info"
+                               th:onclick="'window.location.href = \'/books/' + ${book.id} + '\''"
+                               style="cursor: pointer;"
+                               th:text="${book.title}">Book Title</p>
                         </div>
                     </div>
                     <div class="actions">
@@ -90,11 +98,15 @@
             <div class="scroll-content">
                 <div class="book-item" th:each="book : ${books}" th:if="${book.genre == 'Romantic'}" th:attr="data-book-id=${book.id}">
                     <div class="tile">
+                        <span class="book-number"></span>
                         <a th:href="@{/books/{bookId}(bookId=${book.id})}">
                             <img th:src="${book.imageUrl}" th:alt="${book.title}">
                         </a>
                         <div class="details">
-                            <p class="info" th:text="${book.title}">Book Title</p>
+                            <p class="info"
+                               th:onclick="'window.location.href = \'/books/' + ${book.id} + '\''"
+                               style="cursor: pointer;"
+                               th:text="${book.title}">Book Title</p>
                         </div>
                     </div>
                     <div class="actions">
@@ -115,11 +127,15 @@
             <div class="scroll-content">
                 <div class="book-item" th:each="book : ${books}" th:if="${book.genre == 'Novels'}" th:attr="data-book-id=${book.id}">
                     <div class="tile">
+                        <span class="book-number"></span>
                         <a th:href="@{/books/{bookId}(bookId=${book.id})}">
                             <img th:src="${book.imageUrl}" th:alt="${book.title}">
                         </a>
                         <div class="details">
-                            <p class="info" th:text="${book.title}">Book Title</p>
+                            <p class="info"
+                               th:onclick="'window.location.href = \'/books/' + ${book.id} + '\''"
+                               style="cursor: pointer;"
+                               th:text="${book.title}">Book Title</p>
                         </div>
                     </div>
                     <div class="actions">
@@ -140,11 +156,15 @@
             <div class="scroll-content">
                 <div class="book-item" th:each="book : ${books}" th:if="${book.genre == 'Action'}" th:attr="data-book-id=${book.id}">
                     <div class="tile">
+                        <span class="book-number"></span>
                         <a th:href="@{/books/{bookId}(bookId=${book.id})}">
                             <img th:src="${book.imageUrl}" th:alt="${book.title}">
                         </a>
                         <div class="details">
-                            <p class="info" th:text="${book.title}">Book Title</p>
+                            <p class="info"
+                               th:onclick="'window.location.href = \'/books/' + ${book.id} + '\''"
+                               style="cursor: pointer;"
+                               th:text="${book.title}">Book Title</p>
                         </div>
                     </div>
                     <div class="actions">
@@ -165,11 +185,15 @@
             <div class="scroll-content">
                 <div class="book-item" th:each="book : ${books}" th:if="${book.genre == 'Literature'}" th:attr="data-book-id=${book.id}">
                     <div class="tile">
+                        <span class="book-number"></span>
                         <a th:href="@{/books/{bookId}(bookId=${book.id})}">
                             <img th:src="${book.imageUrl}" th:alt="${book.title}">
                         </a>
                         <div class="details">
-                            <p class="info" th:text="${book.title}">Book Title</p>
+                            <p class="info"
+                               th:onclick="'window.location.href = \'/books/' + ${book.id} + '\''"
+                               style="cursor: pointer;"
+                               th:text="${book.title}">Book Title</p>
                         </div>
                     </div>
                     <div class="actions">
@@ -190,11 +214,15 @@
             <div class="scroll-content">
                 <div class="book-item" th:each="book : ${books}" th:if="${book.genre == 'Technology'}" th:attr="data-book-id=${book.id}">
                     <div class="tile">
+                        <span class="book-number"></span>
                         <a th:href="@{/books/{bookId}(bookId=${book.id})}">
                             <img th:src="${book.imageUrl}" th:alt="${book.title}">
                         </a>
                         <div class="details">
-                            <p class="info" th:text="${book.title}">Book Title</p>
+                            <p class="info"
+                               th:onclick="'window.location.href = \'/books/' + ${book.id} + '\''"
+                               style="cursor: pointer;"
+                               th:text="${book.title}">Book Title</p>
                         </div>
                     </div>
                     <div class="actions">

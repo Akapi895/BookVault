@@ -7,6 +7,7 @@ import com.scar.lms.service.BorrowService;
 import com.scar.lms.service.CloudStorageService;
 import com.scar.lms.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings("SameReturnValue")
@@ -114,39 +116,56 @@ public class UserController {
     }
 
     @GetMapping("/profile/edit")
-    public CompletableFuture<String> showEditProfileForm(Authentication authentication, Model model) {
-        return authenticationService.getAuthenticatedUser(authentication)
-                .thenApply(user -> {
-                    model.addAttribute("user", user);
-                    return "edit-user";
-                })
-                .exceptionally(ex -> {
-                    model.addAttribute("error", "Could not retrieve user information. Please try again later.");
-                    return "edit-user";
-                });
+    public String showEditProfileForm(Authentication authentication, Model model) {
+        try {
+            CompletableFuture<User> userFuture = authenticationService.getAuthenticatedUser(authentication);
+            User user = userFuture.join(); // Wait for completion
+            model.addAttribute("user", user);
+        } catch (Exception ex) {
+            model.addAttribute("error", "Could not retrieve user information. Please try again later.");
+        }
+        return "edit-user";
     }
 
     @PostMapping("/profile/edit")
-    public String updateProfile(Authentication authentication,
-                                @RequestParam("username") String updatedUsername,
-                                @RequestParam("displayName") String updatedDisplayName,
-                                @RequestParam("email") String updatedEmail,
-                                @RequestParam("aboutMe") String aboutMe,
-                                Model model) {
-        CompletableFuture<User> userFuture = getUser(authentication);
-        User currentUser = userFuture.join();
-        if (!authenticationService.validateEditProfile(currentUser, updatedUsername, updatedDisplayName, updatedEmail)) {
-            model.addAttribute("failure", "Profile not updated.");
-        } else {
-            currentUser.setUsername(updatedUsername);
-            currentUser.setDisplayName(updatedDisplayName);
-            currentUser.setEmail(updatedEmail);
-            currentUser.setAboutMe(aboutMe);
-            userService.updateUser(currentUser);
-            model.addAttribute("success", "Profile updated successfully.");
-        }
-        return "redirect:/users/profile/edit";
+    public CompletableFuture<ResponseEntity<String>> updateProfile(
+            Authentication authentication,
+            @RequestBody Map<String, String> updates) {
+
+        String updatedUsername = updates.get("username");
+        String updatedDisplayName = updates.get("displayName");
+        String updatedEmail = updates.get("email");
+        String aboutMe = updates.get("aboutMe");
+
+        return authenticationService.getAuthenticatedUser(authentication)
+                .thenApply(currentUser -> {
+                    try {
+                        if (currentUser == null) {
+                            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                                    .body("User not found");
+                        }
+
+                        currentUser.setUsername(updatedUsername);
+                        currentUser.setDisplayName(updatedDisplayName);
+                        currentUser.setEmail(updatedEmail);
+                        currentUser.setAboutMe(aboutMe);
+
+                        userService.updateUser(currentUser);
+                        return ResponseEntity.ok("Profile updated successfully");
+                    } catch (Exception e) {
+                        log.error("Error updating user: {}", e.getMessage(), e);
+                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                .body(e.getMessage());
+                    }
+                })
+                .exceptionally(e -> {
+                    log.error("Failed to update profile: {}", e.getMessage(), e);
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                            .body("Server error occurred");
+                });
     }
+
+
 
     @PostMapping("/updatePassword")
     public String updatePassword(Authentication authentication,

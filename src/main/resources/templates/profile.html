@@ -21,7 +21,8 @@
 </head>
 
 <body>
-    <div th:replace="~{frame :: body}"></div>
+<div th:replace="~{frame :: body}"></div>
+<div th:replace="~{frame :: nav}"></div>
 
     <div class="container">
         <section>
@@ -98,6 +99,8 @@
                     <h><strong>Display name: </strong><span th:text="${user.displayName}"></span></h>
                     <br></br>
                     <h><strong>Email: </strong><span th:text="${user.email}"></span></h>
+                    <br></br>
+                    <h><strong>About me: </strong><span th:text="${user.aboutMe}"></span></h>
                     <br></br>
                 </section>
 
