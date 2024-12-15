@@ -91,14 +91,14 @@
                     <p class="number" th:text="${bookCount}">30</p>
                     <p class="label">Total books</p>
                 </div>
-                <button class="btn">Click</button>
+                <button class="btn"><a href="/admin/total-book" class="btn">Click</a></button>
             </div>
             <div class="card">
                 <div class="content">
                     <p class="number" th:text="${userCount} - ${adminCount}">30</p>
                     <p class="label">Total users</p>
                 </div>
-                <button class="btn">Click</button>
+                <button class="btn"><a href="/admin/users" class="btn">Click</a></button>
             </div>
             <div class="card">
                 <div class="content">
@@ -112,7 +112,7 @@
                     <p class="number" th:text="${borrowCount}">30</p>
                     <p class="label">Total borrow</p>
                 </div>
-                <button class="btn">Click</button>
+                <button class="btn"><a href="/admin/total-borrow" class="btn">Click</a></button>
             </div>
             <script>
                 const buttons = document.querySelectorAll('.btn');

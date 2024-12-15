@@ -40,8 +40,8 @@
             <tbody>
             <tr th:each="user : ${users}">
                 <td style="text-align: center" th:text="${user.id}">a user id</td>
-                <td th:text="${user.username}">a user username</td>
-                <td th:text="${user.displayName}">display name</td>
+                <td style="text-align: center" th:text="${user.username}">a user username</td>
+                <td style="text-align: center" th:text="${user.displayName}">display name</td>
                 <td style="text-align: center" th:text="${user.role}">role</td>
                 <td style="text-align: center">
                     <i class='bx bxs-edit edit-icon'
