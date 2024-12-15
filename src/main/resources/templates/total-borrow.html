@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="/css/admin.css">
     <link rel="stylesheet" href="/css/admin-profile.css">
     <link rel="stylesheet" href="/css/favourites.css">
-    <link rel="stylesheet" href="/css/history.css">
     <link rel="stylesheet" href="/css/total-user.css">
     <link rel="stylesheet" href="/css/total-book.css">
     <link rel="stylesheet" href="/css/total-borrow.css">
@@ -104,13 +103,20 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="borrow : ${borrows}">
-                <td style="text-align: center" th:text="${borrow.id}"></td>
+            <tr th:each="borrow, iterStat : ${borrows}">
+                <td style="text-align: center" th:text="${iterStat.count}"></td>
                 <td th:text="${borrow.book.title}"></td>
                 <td style="text-align: center" th:text="${borrow.user.id}"></td>
-                <td th:text="${borrow.borrowDate}"></td>
-                <td style="text-align: center" th:text="${borrow.returnDate}"></td>
-                <td style="text-align: center"><i class='bx bxs-trash delete-icon' th:data-id="${borrow.id}"></i></td>
+                <td style="text-align: center" th:text="${borrow.borrowDate}"></td>
+                <td style="text-align: center" th:text="${borrow.returnDate != null ? borrow.returnDate : 'N/A'}"></td>
+                <td style="text-align: center">
+                    <i class='bx bxs-trash delete-icon'
+                       th:data-id="${borrow.id}"
+                       style="font-size: 16px; color: #ff4444; transition: all 0.3s ease; cursor: pointer;"
+                       onmouseover="this.style.fontSize='18px'"
+                       onmouseout="this.style.fontSize='16px'">
+                    </i>
+                </td>
             </tr>
             </tbody>
         </table>
