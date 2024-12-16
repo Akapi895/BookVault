@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/book-list.css">
     <link rel="stylesheet" href="/css/chat.css">
     <link rel="stylesheet" href="/css/book-search.css">
+    <link rel="stylesheet" href="/css/frame.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
@@ -19,31 +20,29 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 </head>
-
 <body>
 <div th:replace="~{frame :: body}"></div>
-<div th:replace="~{frame :: nav}"></div>
-
 <div class="container-search">
     <section class="display-filter">
-        <!-- Uncomment and fix search form -->
-<!--        <form th:action="@{/books/search}" method="get" class="search-filter-box">-->
-<!--            <label>-->
-<!--                <input type="text" name="title" th:value="${title}" class="search-filter-txt" placeholder="Title">-->
-<!--            </label>-->
-<!--            <label>-->
-<!--                <input type="text" name="authorName" th:value="${authorName}" class="search-filter-txt" placeholder="Author">-->
-<!--            </label>-->
-<!--            <label>-->
-<!--                <input type="text" name="genreName" th:value="${genreName}" class="search-filter-txt" placeholder="Genre">-->
-<!--            </label>-->
-<!--            <label>-->
-<!--                <input type="text" name="year" th:value="${year}" class="search-filter-txt" placeholder="Year">-->
-<!--            </label>-->
-<!--            <button type="submit" class="search-btn">-->
-<!--                <i class='bx bx-search'></i>-->
-<!--            </button>-->
-<!--        </form>-->
+        <div class="search-filter-box">
+            <form id="searchForm" action="/books/search" method="get" style="position: relative; align-items: center;">
+                <div class="form-group" style="margin-right: 5px;">
+                    <input type="text" id="title" name="title" class="search-filter-txt" placeholder="Title">
+                </div>
+                <div class="form-group" style="margin-right: 5px;">
+                    <input type="text" id="authorName" name="authorName" class="search-filter-txt" placeholder="Author">
+                </div>
+                <div class="form-group" style="margin-right: 5px;">
+                    <input type="text" id="genreName" name="genreName" class="search-filter-txt" placeholder="Genre">
+                </div>
+                <div class="form-group">
+                    <input type="text" id="year" name="year" class="search-filter-txt" placeholder="Year">
+                </div>
+                <button type="submit" class="search-button" style="height: 39px; display: flex;">
+                    <i class='bx bx-search'></i>
+                </button>
+            </form>
+        </div>
     </section>
 
     <section>
@@ -64,23 +63,79 @@
 
         <div class="pagination" th:if="${totalPages > 0}">
             <!-- Previous page -->
-            <a th:if="${currentPage > 0}"
-               th:href="@{/books/search(page=${currentPage - 1}, query=${query}, title=${title}, authorName=${authorName}, genreName=${genreName}, year=${year})}"
-               class="page-link">&laquo; Previous</a>
+            <a th:href="@{/books/search(page=${currentPage - 1}, query=${query}, title=${title}, authorName=${authorName}, genreName=${genreName}, year=${year})}"
+               th:style="${currentPage == 0} ? 'pointer-events: none; color: #6c757d; background-color: #f8f9fa; cursor: default;' : ''"
+               style="text-decoration: none; padding: 5px 10px; color: #007bff;">&laquo; Previous</a>
 
             <!-- Page numbers -->
             <th:block th:each="pageNum : ${#numbers.sequence(0, totalPages - 1)}">
                 <a th:href="@{/books/search(page=${pageNum}, query=${query}, title=${title}, authorName=${authorName}, genreName=${genreName}, year=${year})}"
                    th:text="${pageNum + 1}"
-                   th:class="${pageNum == currentPage ? 'active' : ''}"></a>
+                   th:style="${pageNum == currentPage} ? 'pointer-events: none; color: #6c757d; background-color: #f8f9fa; cursor: default;' : ''"
+                   style="text-decoration: none; padding: 5px 10px; color: #007bff; border: 1px solid #dee2e6; margin: 0 2px;"></a>
             </th:block>
 
             <!-- Next page -->
-            <a th:if="${currentPage < totalPages - 1}"
-               th:href="@{/books/search(page=${currentPage + 1}, query=${query}, title=${title}, authorName=${authorName}, genreName=${genreName}, year=${year})}"
-               class="page-link">Next &raquo;</a>
+            <a th:href="@{/books/search(page=${currentPage + 1}, query=${query}, title=${title}, authorName=${authorName}, genreName=${genreName}, year=${year})}"
+               th:style="${currentPage == totalPages - 1} ? 'pointer-events: none; color: #6c757d; background-color: #f8f9fa; cursor: default;' : ''"
+               style="text-decoration: none; padding: 5px 10px; color: #007bff;">Next &raquo;</a>
         </div>
+
     </section>
 </div>
+<script>
+    const borrowButtons = document.querySelectorAll(".borrow-btn");
+    const favouriteButtons = document.querySelectorAll(".bx-heart");
+
+    borrowButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            const bookId = this.closest(".book-item").getAttribute("data-book-id");
+
+            fetch(`/books/borrow/${bookId}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+                .then(response => response.text())
+                .then(data => {
+                    if (data === "Book borrowed successfully") {
+                        alert("Book borrowed successfully");
+                    } else {
+                        alert("Failed to borrow book");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("An error occurred while borrowing the book");
+                });
+        });
+    });
+
+    favouriteButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            const bookId = this.closest(".book-item").getAttribute("data-book-id");
+
+            fetch(`/books/add-favourite/${bookId}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+                .then(response => response.text())
+                .then(data => {
+                    if (data === "Book added to favourites") {
+                        alert("Book added to favourites");
+                    } else {
+                        alert("Failed to add favourite");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("An error occurred while adding the book to favourites");
+                });
+        });
+    });
+</script>
 </body>
 </html>

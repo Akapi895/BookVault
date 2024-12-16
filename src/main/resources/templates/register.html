@@ -37,19 +37,19 @@
 
     <form th:action="@{/register}" method="post" class="form-group" th:object="${user}">
         <label>Username*
-            <input type="text" th:field="*{username}" placeholder="Username" required>
+            <input type="text" th:field="*{username}" placeholder="tngoxinggai" required>
         </label>
 
         <label>Password*
-            <input type="password" th:field="*{password}" placeholder="withatleast8char" required>
+            <input type="password" th:field="*{password}" placeholder="with8char" required>
         </label>
 
         <label>Display Name*
-            <input type="text" th:field="*{displayName}" placeholder="NguyenVanA" required>
+            <input type="text" th:field="*{displayName}" placeholder="tngoxinggai" required>
         </label>
 
         <label>Email*
-            <input type="email" th:field="*{email}" placeholder="example@gmail.com" required>
+            <input type="email" th:field="*{email}" placeholder="tngo@gmail.com" required>
         </label>
 
         <button type="submit" class="btn">Register</button>

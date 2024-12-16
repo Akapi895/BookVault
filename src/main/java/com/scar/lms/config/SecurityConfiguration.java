@@ -47,12 +47,11 @@ public class SecurityConfiguration {
                                 "/login",
                                 "/css/**",
                                 "/js/**",
-                                "/media/**\",\n" +
-                                        "                                \"/static/**\",\n" +
-                                        "                                \"/images/**\",\n" +
-                                        "                                \"/favicon.ico").permitAll()
+                                "/media/**",
+                                "/static/**",
+                                "/images/**",
+                                "/favicon.ico").permitAll()
                         .requestMatchers("/books/**", "/user/**", "/chat").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
-//                        .requestMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")
                         .requestMatchers("/ws/**", "/app/**").authenticated()
                         .anyRequest().authenticated()
                 )
@@ -61,7 +60,6 @@ public class SecurityConfiguration {
                         .usernameParameter("username")
                         .passwordParameter("password")
                         .successHandler(roleBasedAuthenticationSuccessHandler())
-                        .failureHandler(loginFailureHandler())
                         .permitAll())
                 .oauth2Login(oauth2Login -> oauth2Login
                         .loginPage("/login")
@@ -80,7 +78,7 @@ public class SecurityConfiguration {
 
     @Bean
     public AuthenticationFailureHandler loginFailureHandler() {
-        return (request, response, exception) -> {
+        return (request, response, _) -> {
             request.getSession().setAttribute("error", "Incorrect username or password");
             response.sendRedirect("/login?error=true");
         };
@@ -88,7 +86,7 @@ public class SecurityConfiguration {
 
     @Bean
     public LogoutSuccessHandler userLogoutSuccessHandler() {
-        return (request, response, authentication) -> {
+        return (_, response, authentication) -> {
             response.sendRedirect("/login?logout=true");
             if (authentication != null) {
                 System.out.printf("User %s logged out%n", authentication.getName());
@@ -122,7 +120,7 @@ public class SecurityConfiguration {
     }
 
     private AuthenticationSuccessHandler getAuthenticationSuccessHandler() {
-        return (request, response, authentication) -> {
+        return (_, response, authentication) -> {
             Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
             if (roles.contains("ROLE_ADMIN")) {
                 response.sendRedirect("/admin");

@@ -14,7 +14,7 @@ public interface BorrowService {
 
     void updateBorrow(Borrow borrow);
 
-    void removeBorrow(int borrowId);
+    void removeBorrow(int borrowID);
 
     CompletableFuture<Optional<Borrow>> findBorrow(int bookId, int userId);
 

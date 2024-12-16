@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     @Override
     public CompletableFuture<List<User>> findAllUsers() {
-        return CompletableFuture.supplyAsync(() -> userRepository.findAll());
+        return CompletableFuture.supplyAsync(userRepository::findAll);
     }
 
     @Async

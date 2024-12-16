@@ -53,6 +53,11 @@
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
 }
+#submitBtn:hover {
+    background-color: #8eb899; /* Màu nền khi hover (xanh nhạt hơn) */
+    color: #fff; /* Màu chữ giữ nguyên */
+    cursor: pointer; /* Thêm hiệu ứng con trỏ */
+}
 
 .form-group {
     margin-bottom: 1rem;

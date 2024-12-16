@@ -7,6 +7,7 @@
     <title>Library Management System</title>
 
     <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/chat.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,9 +19,9 @@
 <body>
     <header>
         <ul class="navmenu">
-            <li><a href="#home">HOME</a></li>
-            <li><a href="#about">ABOUT</a></li>
-            <li><a href="#contact">CONTACT</a></li>
+            <li><a href="/home">HOME</a></li>
+            <li><a href="#">ABOUT</a></li>
+            <li><a href="#">CONTACT</a></li>
         </ul>
         <ul class="navmenu">
             <li><a href="/login" class="text-register">LOG IN</a></li>
@@ -28,7 +29,7 @@
         </ul>
     </header>
 
-    <section id="home" class="main-home container">
+    <section class="main-home container">
         <div class="video-background">
         <video autoplay loop muted playsinline>
             <source src="/media/video/home.mp4" type="video/mp4">
@@ -49,7 +50,7 @@
         </div>
     </section>
 
-    <section id="about" class="about-section">
+    <section>
         <div class="about-me-container">
             <div class="about-me-box">
                 <div class="about-me-content">
@@ -73,7 +74,7 @@
                     <div class="container-about">
                         <div class="section">
                             <h3>Book Management:</h3>
-                            <ul style="list-style-type:circle;">
+                            <ul  style="list-style-type:circle;">
                                 <li>Add new books</li>
                                 <li>Delete books</li>
                                 <li>Edit book information</li>
@@ -81,9 +82,9 @@
                                 <li>Search for books using the Google Books API</li>
                                 <li>View book lists</li>
                                 <li>Generate book statistics</li>
-                            </ul>
                             <h3>User Management:</h3>
-                            <ul style="list-style-type:circle;">
+
+                            <ul  style="list-style-type:circle;">
                                 <li>Add new users</li>
                                 <li>Delete users</li>
                                 <li>Edit user information</li>
@@ -95,7 +96,7 @@
 
                         <div class="section" style="border-left: 2px solid #007BFF; padding-left: 10%;">
                             <h3>For Users:</h3>
-                            <ul style="list-style-type:circle;">
+                            <ul  style="list-style-type:circle;">
                                 <li>Borrow books</li>
                                 <li>Return books</li>
                                 <li>View and edit account information</li>
@@ -109,7 +110,7 @@
                         </div>
                     </div>
                     <h3>Other Key Features:</h3>
-                    <ul style="list-style-type:circle;">
+                    <ul  style="list-style-type:circle;">
                         <li><strong>Game:</strong> A book title guessing game with hints</li>
                         <li><strong>Google Books API:</strong> Search for books using the Google Books API</li>
                         <li><strong>Spring Security:</strong> Application security</li>
@@ -122,11 +123,20 @@
             </div>
         </div>
     </section>
-
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <h2>Contact Us</h2>
-            <p>If you have any questions, feel free to reach out to us at TKT@library.com</p>
+    <section>
+        <div class="contact-container">
+            <div class="contact-item">
+                <img src="/media/image/avt1.jpg" alt="Creator 1" class="contact-icon">
+                <p>Minh Tran<br> phone: 012 345 6666<br> Mail: mt@gmail.com</p>
+            </div>
+            <div class="contact-item">
+                <img src="/media/image/avt2.jpeg" alt="Creator 2" class="contact-icon">
+                <p>Tam Ngo <br> phone: 0375 603 357<br> Mail: tngo@gmail.com</p>
+            </div>
+            <div class="contact-item">
+                <img src="/media/image/avt3.jpg" alt="Creator 3" class="contact-icon">
+                <p>San <br> phone: 091 870 8888<br> Mail: san@gmail.com</p>
+            </div>
         </div>
     </section>
 </body>

@@ -26,7 +26,7 @@ public interface AuthenticationService extends UserDetailsService {
     String encryptPassword(String password);
 
     @SuppressWarnings("unused")
-    Collection<? extends GrantedAuthority> getAuthorities(User user);
+    Collection<? extends GrantedAuthority> getAuthorities(String username);
 
     CompletableFuture<String> extractUsernameFromAuthentication(Authentication authentication);
 

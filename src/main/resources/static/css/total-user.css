@@ -1,87 +1,28 @@
-.tabular-wrapper {
-    position: relative;
-    border-radius: 10px;
-    padding: 2rem;
-    margin: 10px 10%;
+/* Style for modal overlay */
+th:nth-child(1), td:nth-child(1) {
+    width: 10%;
 }
 
-.table-container {
-    width: 100%;
-    overflow-x: auto;
+th:nth-child(2), td:nth-child(2) {
+    width: 23%;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+th:nth-child(3), td:nth-child(3) {
+    width: 23%;
 }
 
-thead {
-    background: rgba(113, 99, 186, 255);
-    color: #fff;
+th:nth-child(4), td:nth-child(4) {
+    width: 23%;
 }
 
-th {
-    padding: 15px;
-    font-weight: bold;
+th:nth-child(5), td:nth-child(5) {
+    width: 12%;
 }
 
-tbody {
-    background-color: white;
+th:nth-child(6), td:nth-child(6) {
+    width: 14%;
 }
 
-td {
-    padding: 15px;
-    font-size: 16px;
-    vertical-align: middle;
-}
-
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-/* Column widths */
-th:nth-child(1), td:nth-child(1) { width: 10%; }
-th:nth-child(2), td:nth-child(2) { width: 23%; }
-th:nth-child(3), td:nth-child(3) { width: 23%; }
-th:nth-child(4), td:nth-child(4) { width: 23%; }
-th:nth-child(5), td:nth-child(5) { width: 10%; }
-th:nth-child(6), td:nth-child(6) { width: 11%; }
-
-/* Icon styles with transitions */
-.edit-icon,
-.delete-icon {
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.edit-icon {
-    color: #4caf50;
-}
-
-.edit-icon:hover {
-    font-size: 18px;
-    color: #45a049;
-}
-
-.delete-icon {
-    color: #f44336;
-}
-
-.delete-icon:hover {
-    font-size: 18px;
-    color: #e53935;
-}
-
-tbody tr:hover {
-    background-color: #f5f5f5;
-}
-
-thead tr:hover {
-    background: rgba(113, 99, 186, 255);
-}
-
-/* Modal overlay style */
 .modal-overlay-user {
     display: none;
     position: fixed;
@@ -95,75 +36,38 @@ thead tr:hover {
     z-index: 1000;
 }
 
-/* Modal box */
 .modal-user-box {
-    width: 100%;
-    max-width: 400px; /* Đặt chiều rộng tối đa cho form */
-    margin: 20px auto; /* Canh giữa form */
-    padding: 20px; /* Tạo khoảng cách nội dung */
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px; /* Bo tròn các góc */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.modal-user-box h3 {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     text-align: center;
-    margin-bottom: 15px;
-    color: #333;
-    font-size: 18px;
 }
 
 .modal-user-box form {
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Tăng khoảng cách giữa các phần tử */
-    align-items: center; /* Căn giữa các phần tử */
+    gap: 10px;
 }
 
-/* Label style */
 .modal-user-box label {
+    text-align: left;
     font-size: 14px;
-    font-weight: 500;
-    color: #555;
-    align-self: flex-start; /* Căn trái cho nhãn */
+    margin-bottom: 5px;
 }
 
-/* Input style */
 .modal-user-box input {
     padding: 10px;
-    font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    width: 100%; /* Đảm bảo input rộng full container */
-    box-sizing: border-box; /* Không vượt quá kích thước chứa */
-    transition: border 0.3s;
-}
-
-.modal-user-box input:focus {
-    border: 1px solid #4caf50; /* Hiệu ứng focus */
-    outline: none;
-}
-
-/* Button style */
-.modal-user-box .button-group {
-    display: flex;
-    justify-content: center; /* Căn giữa các nút */
-    gap: 10px; /* Khoảng cách giữa 2 nút */
-    width: 100%;
 }
 
 .modal-user-box button {
-    width: 100%;
-    max-width: 150px; /* Giới hạn chiều rộng nút */
     padding: 10px;
-    font-size: 14px;
-    font-weight: 500;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s, transform 0.2s;
 }
 
 .modal-user-box button[type="submit"] {
@@ -171,26 +75,15 @@ thead tr:hover {
     color: white;
 }
 
-.modal-user-box button[type="submit"]:hover {
-    background-color: #45a049;
-    transform: scale(1.02); /* Hiệu ứng nhẹ khi hover */
-}
-
 .modal-user-box button[type="button"] {
     background-color: #f44336;
     color: white;
-}
-
-.modal-user-box button[type="button"]:hover {
-    background-color: #e53935;
-    transform: scale(1.02);
 }
 
 .modal-buttons button:hover {
     opacity: 0.8;
 }
 
-/* Icon styles */
 .edit-icon,
 .delete-icon {
     font-size: 20px;

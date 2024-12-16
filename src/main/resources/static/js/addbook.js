@@ -1,50 +1,26 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const addBookIcon = document.getElementById("addBookIcon");
-    const addBookModal = document.getElementById("addBookModal");
-    const closeModal = document.getElementById("closeModal");
-    const addBookForm = document.getElementById("addBookForm");
+const addBookIcon = document.getElementById("addBookIcon");
+const addBookModal = document.getElementById("addBookModal");
+const closeModal = document.getElementById("closeModal");
 
-    if (!addBookIcon || !addBookModal || !closeModal || !addBookForm) {
-        console.error("One or more elements not found. Check IDs in HTML.");
-        return;
-    }
+addBookIcon.addEventListener("click", () => {
+    addBookModal.style.display = "flex";
+});
 
-    // console.log("Elements loaded:", addBookIcon, addBookModal, closeModal);
+closeModal.addEventListener("click", () => {
+    addBookModal.style.display = "none";
+});
 
-    // Xử lý sự kiện mở modal
-    addBookIcon.addEventListener("click", (e) => {
-        e.preventDefault();
-        addBookModal.style.display = 'flex';
-        console.log("Add-book clicked");
-    });
+document.getElementById("addBookForm").addEventListener("submit", (e) => {
+    e.preventDefault();
 
-    // Xử lý sự kiện đóng modal
-    closeModal.addEventListener("click", () => {
-        console.log("Close modal clicked");
-        addBookModal.style.display = "none";
-    });
+    const bookId = document.getElementById("bookId").value;
+    const bookTitle = document.getElementById("bookTitle").value;
+    const bookGenres = document.getElementById("bookGenres").value;
 
-    // Xử lý form submit
-    addBookForm.addEventListener("submit", (e) => {
-        e.preventDefault();
+    console.log({ bookId, bookTitle, bookGenres });
 
-        // Lấy dữ liệu từ form
-        const bookId = document.getElementById("bookId").value.trim();
-        const bookTitle = document.getElementById("bookTitle").value.trim();
-        const bookGenres = document.getElementById("bookGenres").value.trim();
+    alert("Book added successfully!");
 
-        if (!bookId || !bookTitle || !bookGenres) {
-            alert("Please fill out all required fields.");
-            return;
-        }
-
-        console.log("Form data:", { bookId, bookTitle, bookGenres });
-
-        // Giả lập thêm sách thành công
-        alert("Book added successfully!");
-
-        // Reset form và đóng modal
-        e.target.reset();
-        addBookModal.style.display = "none";
-    });
+    e.target.reset();
+    addBookModal.style.display = "none";
 });

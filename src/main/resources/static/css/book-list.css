@@ -25,10 +25,12 @@ header {
 .headpage {
     position: sticky;
     top: 0;
-    width: 100%;
     z-index: 1000;
 }
-
+nav {
+    position: sticky;
+    z-index: 1000;
+}
 .navmenu {
     all: unset;
     display: flex;
@@ -102,7 +104,6 @@ h1 {
 form {
     display: flex;
     justify-content: center;
-    margin-bottom: 30px;
 }
 
 :root {
@@ -131,6 +132,7 @@ body {
 }
 
 .nav__list {
+    user-select: none;
     background: white;
     box-shadow: 0px 0px 10px var(--clr-gray200);
     padding: 1rem 0;
@@ -145,7 +147,7 @@ body {
     .nav__item {
         list-style: none;
         position: relative;
-
+        z-index: 1000;
         &:first-child {
             margin-bottom: 2rem;
         }
@@ -225,16 +227,16 @@ a:hover {
     margin-bottom: 20px;
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    user-select: none;
 }
 
 .book-list {
+    user-select: none;
     display: flex;
-    overflow-x: auto;  /* Thay 'hidden' bằng 'auto' để hỗ trợ cuộn ngang */
-    overflow-y: hidden;
+    overflow: hidden;
     flex-wrap: nowrap;
-    max-width: 100%;  /* Đảm bảo phần này có thể mở rộng tối đa theo chiều ngang */
+    max-width: 1050px;
     height: auto;
-    box-sizing: border-box;
 }
 
 .scroll-content {
@@ -242,12 +244,12 @@ a:hover {
     overflow-x: scroll;
     overflow-y: hidden;
     flex-wrap: nowrap;
+    max-width: 100%;
     gap: 20px;
     padding: 10px;
     box-sizing: border-box;
     scroll-behavior: smooth;
 }
-
 
 .scroll-content::-webkit-scrollbar {
     display: none;
@@ -264,7 +266,8 @@ a:hover {
     align-items: center;
     justify-content: flex-start;
     flex: 0 0 auto;
-    min-width: 150px;
+    width: auto;
+    height: auto;
     word-wrap: break-word;
     border: none;
     border-radius: 0;
@@ -359,19 +362,6 @@ a:hover {
     background-color: #818fff;
 }
 
-.return-btn {
-    background-color: #ff0000;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.return-btn:hover {
-    background-color: #cc0000;
-}
 
 .actions > i {
     color: #333;
@@ -411,6 +401,7 @@ a:hover {
     padding: 10px;
     margin: 0 auto;
     width: 100%;
+    user-select: none;
 }
 
 .category {
@@ -479,28 +470,26 @@ a:hover {
 
 input[type="text"] {
     width: 300px;
-    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
 button[type="submit"] {
+    background: #ffffff4f;
     padding: 10px 15px;
-    margin-left: 10px;
-    background-color: #5cb85c;
     color: white;
-    border: none;
+    border: 1px solid #ccc;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-left: 1px;
 }
 
 button[type="submit"]:hover {
     background-color: #4cae4c;
 }
 
-.bx-heart.favorited,
-.favorite-active {
+.bx-heart.favorited {
     color: red;
 }
 

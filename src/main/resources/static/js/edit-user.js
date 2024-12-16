@@ -1,11 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
+
     const editIcons = document.querySelectorAll('.edit-icon');
     const deleteIcons = document.querySelectorAll('.delete-icon');
     const editUserModal = document.getElementById('editUser');
-    const closeModalButton = document.getElementById('closeModal');
-    const userForm = document.getElementById('user-list');
+    const closeModal = document.getElementById('closeModal');
 
-    // Xử lý khi ấn Edit
     editIcons.forEach((icon) => {
         icon.addEventListener('click', () => {
             const userId = icon.getAttribute('data-id');
@@ -22,14 +21,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Xử lý khi ấn Cancel
-    if (closeModalButton) {
-        closeModalButton.addEventListener('click', () => {
+    if (closeModal) {
+        closeModal.addEventListener('click', () => {
             editUserModal.style.display = 'none';
         });
+    } else {
+        console.error('Cancel button (closeModal) not found.');
     }
 
-    // Xử lý khi ấn Delete
     deleteIcons.forEach((icon) => {
         icon.addEventListener('click', () => {
             const userId = icon.getAttribute('data-id');
@@ -40,75 +39,64 @@ document.addEventListener('DOMContentLoaded', () => {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
                 })
-                    .then(response => {
-                        if (response.ok) {
-                            alert('User deleted successfully!');
-                            location.reload();
-                        } else {
-                            alert('Failed to delete user.');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('Failed to delete user.');
-                    });
-            }
-        });
-    });
-
-    // Xử lý Submit form chỉnh sửa
-    if (userForm) {
-        userForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const submitButton = userForm.querySelector('button[type="submit"]');
-            submitButton.disabled = true;
-
-            const userId = document.getElementById('userId').value;
-            const username = document.getElementById('Username').value;
-            const displayName = document.getElementById('Display-name').value;
-            const role = document.getElementById('Role').value;
-
-            fetch('/admin/user/update', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Accept': 'text/plain'
-                },
-                body: new URLSearchParams({
-                    id: userId,
-                    username: username,
-                    displayName: displayName,
-                    role: role
-                })
-            })
-                .then(async response => {
-                    const text = await response.text();
-                    if (!response.ok) {
-                        throw new Error(text);
-                    }
-                    return text;
-                })
-                .then(message => {
-                    alert(message);
-                    if (message.includes('successfully')) {
+                .then(response => {
+                    if (response.ok) {
+                        alert('User deleted successfully!');
                         location.reload();
+                    } else {
+                        alert('Failed to delete user.');
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert(error.message || 'Failed to update user');
-                })
-                .finally(() => {
-                    submitButton.disabled = false;
-                    editUserModal.style.display = 'none';
+                    alert('Failed to delete user.');
                 });
+            } else {
+                console.error('User ID is null or undefined.');
+            }
         });
-    }
-
-    // Xử lý khi click bên ngoài modal để tắt
-    window.addEventListener('click', (event) => {
-        if (event.target === editUserModal) {
-            editUserModal.style.display = 'none';
-        }
     });
+
+    const userForm = document.getElementById('user-list');
+    userForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const userId = document.getElementById('userId').value;
+        const username = document.getElementById('Username').value;
+        const displayName = document.getElementById('Display-name').value;
+        const role = document.getElementById('Role').value;
+
+        fetch('/admin/user/update', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams({
+                id: userId,
+                username: username,
+                displayName: displayName,
+                role: role
+            })
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.text();
+                } else {
+                    return response.text().then(errMessage => {
+                        throw new Error(errMessage);
+                    });
+                }
+            })
+            .then(message => {
+                alert(message);
+                location.reload();
+            })
+            .catch(error => {
+                console.error('Error:', error.message);
+                alert(`An error occurred: ${error.message}`);
+            });
+
+        document.getElementById('editUser').style.display = 'none';
+    });
+
 });

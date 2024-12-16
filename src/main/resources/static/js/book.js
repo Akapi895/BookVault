@@ -12,15 +12,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const scrollButtonLeft = document.querySelector('.scroll-btn.left');
     const scrollButtonRight = document.querySelector('.scroll-btn.right');
 
-    function scrollLeft(sectionId) {
-        const scrollContainer = document.querySelector(`#${sectionId} .scroll-content`);
+    scrollButtonLeft.addEventListener('click', () => {
         scrollContainer.scrollBy({left: -200, behavior: 'smooth'});
-    }
+    });
 
-    function scrollRight(sectionId) {
-        const scrollContainer = document.querySelector(`#${sectionId} .scroll-content`);
+    scrollButtonRight.addEventListener('click', () => {
         scrollContainer.scrollBy({left: 200, behavior: 'smooth'});
-    }
+    });
 
     const borrowButtons = document.querySelectorAll(".borrow-btn");
     const favouriteButtons = document.querySelectorAll(".bx-heart");
