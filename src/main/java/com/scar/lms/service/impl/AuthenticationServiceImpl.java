@@ -64,9 +64,21 @@ public class AuthenticationServiceImpl implements AuthenticationService, UserDet
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(),
                 user.getPassword(),
-                getAuthorities(user.getUsername())
+                getAuthorities(user)
         );
     }
+
+//    @Override
+//    public UserDetails loadUserByUsername(String username) {
+//        User user = userRepository
+//                .findByUsername(username)
+//                .orElseThrow(() -> new UserNotFoundException("User with username not found: " + username));
+//        return new org.springframework.security.core.userdetails.User(
+//                user.getUsername(),
+//                user.getPassword(),
+//                getAuthorities(user.getUsername())
+//        );
+//    }
 
     @Override
     public boolean validateRegistration(String username, String password,
@@ -124,11 +136,19 @@ public class AuthenticationServiceImpl implements AuthenticationService, UserDet
         return bCryptPasswordEncoder.encode(password);
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities(String username) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UserNotFoundException("User with username not found: " + username));
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities(String username) {
+//        User user = userRepository.findByUsername(username)
+//                .orElseThrow(() -> new UserNotFoundException("User with username not found: " + username));
+//
+//        Set<GrantedAuthority> authorities = new HashSet<>();
+//        authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
+//        System.out.println("Assigned authority: ROLE_" + user.getRole().name());
+//        return authorities;
+//    }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities(User user) {
         Set<GrantedAuthority> authorities = new HashSet<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
         System.out.println("Assigned authority: ROLE_" + user.getRole().name());
@@ -151,6 +171,6 @@ public class AuthenticationServiceImpl implements AuthenticationService, UserDet
         String username = extractUsernameFromAuthentication(authentication).join();
         return userRepository.findByUsername(username)
                 .map(CompletableFuture::completedFuture)
-                .orElseGet(() -> CompletableFuture.failedFuture(new UserNotFoundException("User with username notfound: " + username)));
+                .orElseGet(() -> CompletableFuture.failedFuture(new UserNotFoundException("User with username not found: " + username)));
     }
 }

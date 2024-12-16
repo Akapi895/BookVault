@@ -23,16 +23,17 @@ public class User {
     @NonNull
     private String username;
 
-    @Column(name = "PASSWORD")
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
 
-    @Column(name = "DISPLAY_NAME")
+    @Column(name = "DISPLAY_NAME", nullable = false)
     @NonNull
     private String displayName;
 
-    @Column(name = "EMAIL", unique = true)
+    @Column(name = "EMAIL", unique = true, nullable = false)
     private String email;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "ROLE", nullable = false)
     @NonNull
     private Role role;
@@ -46,8 +47,7 @@ public class User {
     @Column(name = "ABOUT_ME")
     private String aboutMe;
 
-    @OneToMany(fetch = FetchType.EAGER,
-            mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private Set<Borrow> borrows = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -56,12 +56,10 @@ public class User {
             inverseJoinColumns = { @JoinColumn(name = "BOOK_ID") })
     private Set<Book> favouriteBooks = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.EAGER,
-            mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private Set<Notify> notifies = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.EAGER,
-            mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private Set<Rating> ratings = new HashSet<>();
 
     @Override
