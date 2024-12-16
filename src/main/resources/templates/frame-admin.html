@@ -8,105 +8,158 @@
     <link rel="stylesheet" href="/css/admin.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap"
           rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
           integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 </head>
-    <body>
-        <header class="headpage">
-            <ul class="navmenu">
-                <li><a href="/admin">HOME</a></li>
-                <li><a href="/admin/total-book">BOOKS</a></li>
-                <li><a href="/admin/users">USERS</a></li>
-                <li><a href="/admin/total-borrow">BORROWS</a></li>
-            </ul>
+<body>
+<header class="headpage">
+    <ul class="navmenu">
+        <li><a href="/admin">HOME</a></li>
+        <li><a href="/admin/total-book">BOOKS</a></li>
+        <li><a href="/admin/users">USERS</a></li>
+        <li><a href="/admin/total-borrow">BORROWS</a></li>
+    </ul>
 
-            <ul class="navmenu" style="display: flex; align-items: center; gap: 0; list-style: none; padding: 0; margin: 0;">
-                <li style="display: flex; align-items: center; gap: 2px;">
-                    <input
-                            type="text"
-                            id="searchBook"
-                            placeholder="Search books..."
-                            style="
-                        padding: 5px 10px;
-                        font-size: 14px;
-                        border: 1px solid #ccc;
-                        border-radius: 5px;
-                        width: 200px;
-                        height: 40px;
-                    "
-                    >
-                    <a href="#" style="display: flex; align-items: center;">
-                        <i class='bx bx-search' style="transform: scale(1.5);"></i>
-                    </a>
-                </li>
-                <li><a href="/admin/admin-profile"><i class='bx bx-user-circle' style="transform: scale(1.5);"></i></a></li>
-            </ul>
-        </header>
+    <ul class="navmenu" style="display: flex; align-items: center; gap: 0; list-style: none; padding: 0; margin: 0;">
+        <li style="display: flex; align-items: center; gap: 2px;">
+            <input
+                    type="text"
+                    id="searchBook"
+                    placeholder="Search books..."
+                    style="
+                    padding: 5px 10px;
+                    font-size: 14px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    width: 200px;
+                    height: 40px;
+                "
+            >
+            <a href="#" style="display: flex; align-items: center;">
+                <i class='bx bx-search' style="transform: scale(1.5);"></i>
+            </a>
+        </li>
+        <li><a href="/admin/admin-profile"><i class='bx bx-user-circle' style="transform: scale(1.5);"></i></a></li>
+    </ul>
+</header>
 
-        <nav>
-        <ul class="nav__list">
-            <li class="nav__item" data-tooltip="Home">
-                <a href="/admin">
-                    <i class='bx bx-home-alt'></i>
-                </a>
-            </li>
-            <li class="nav__item" data-tooltip="Total-book">
-                <a href="/admin/total-book">
-                    <i class='bx bx-book'></i>
-                </a>
-            </li>
-            <li class="nav__item" data-tooltip="Total-borrow">
-                <a href="/admin/total-borrow">
-                    <i class='bx bx-book-alt'></i>
-                </a>
-            </li>
-            <li class="nav__item" data-tooltip="Total-user">
-                <a href="/admin/users">
-                    <i class='bx bxs-user-rectangle'></i>
-                </a>
-            </li>
-            <li class="nav__item icon-container" id="addBookIcon" data-tooltip="Add-book">
-                <a href="/admin">
-                    <i class='bx bx-book-add'></i>
-                </a>
-            </li>
-            <li class="nav__item" data-tooltip="Account">
-                <a href="/admin/admin-profile">
-                    <i class='bx bx-user-circle'></i>
-                </a>
-            </li>
-            <li class="nav__item" data-tooltip="Logout">
-                <a href="/logout">
-                    <i class='bx bx-log-out'></i>
-                </a>
-            </li>
-        </ul>
-        <div class="modal-overlay" id="addBookModal">
-            <div class="modal-box">
-                <h3>Add New Book</h3>
-                <form id="addBookForm">
-                    <label for="bookId">Book ID:</label>
-                    <input type="text" id="bookId" name="bookId" required/>
+<nav th:fragment="nav">
+    <ul class="nav__list">
+        <li class="nav__item" data-tooltip="Home">
+            <a href="/admin">
+                <i class='bx bx-home-alt'></i>
+            </a>
+        </li>
+        <li class="nav__item" data-tooltip="Total-book">
+            <a href="/admin/total-book">
+                <i class='bx bx-book'></i>
+            </a>
+        </li>
+        <li class="nav__item" data-tooltip="Total-borrow">
+            <a href="/admin/total-borrow">
+                <i class='bx bx-book-alt'></i>
+            </a>
+        </li>
+        <li class="nav__item" data-tooltip="Total-user">
+            <a href="/admin/users">
+                <i class='bx bxs-user-rectangle'></i>
+            </a>
+        </li>
+        <li class="nav__item icon-container" id="addBookIcon" data-tooltip="Add-book">
+            <button style="background: none; border: none; cursor: pointer;">
+                <i class='bx bx-book-add'></i>
+            </button>
+        </li>
+        <li class="nav__item" data-tooltip="Account">
+            <a href="/admin/admin-profile">
+                <i class='bx bx-user-circle'></i>
+            </a>
+        </li>
+        <li class="nav__item" data-tooltip="Logout">
+            <a href="/logout">
+                <i class='bx bx-log-out'></i>
+            </a>
+        </li>
+    </ul>
+</nav>
 
-                    <label for="bookTitle">Title:</label>
-                    <input type="text" id="bookTitle" name="bookTitle" required/>
+<div th:fragment="body">
+    <div class="modal-overlay" id="addBookModal" style="display: none;">
+        <div class="modal-box">
+            <h3>Add New Book</h3>
+            <form id="addBookForm">
+                <label for="bookId">Book ID:</label>
+                <input type="text" id="bookId" name="bookId" required/>
 
-                    <label for="bookGenres">Genres:</label>
-                    <input type="text" id="bookGenres" name="bookGenres" required/>
+                <label for="bookTitle">Title:</label>
+                <input type="text" id="bookTitle" name="bookTitle" required/>
 
-                    <label for="bookImage">Image:</label>
-                    <input type="file" id="bookImage" name="bookImage" accept="image/*"/>
+                <label for="bookGenres">Genres:</label>
+                <input type="text" id="bookGenres" name="bookGenres" required/>
 
-                    <button type="submit">Add to List</button>
-                    <button type="button" id="closeModal">Cancel</button>
-                </form>
-            </div>
+                <label for="bookImage">Image:</label>
+                <input type="file" id="bookImage" name="bookImage" accept="image/*"/>
+
+                <button type="submit">Add to List</button>
+                <button type="button" id="closeModal">Cancel</button>
+            </form>
         </div>
-        <script src="/js/addbook.js"></script>
-    </nav>
-    </body>
+    </div>
+</div>
+
+<script th:fragment="scripts">
+    document.addEventListener("DOMContentLoaded", () => {
+        const addBookIcon = document.getElementById("addBookIcon");
+        const addBookModal = document.getElementById("addBookModal");
+        const closeModal = document.getElementById("closeModal");
+        const addBookForm = document.getElementById("addBookForm");
+
+        if (!addBookIcon || !addBookModal || !closeModal || !addBookForm) {
+            console.error("One or more elements not found. Check IDs in HTML.");
+            return;
+        }
+
+        // Xử lý sự kiện mở modal
+        addBookIcon.addEventListener("click", (e) => {
+            e.preventDefault();
+            addBookModal.style.display = 'flex';
+            console.log("Add-book clicked");
+        });
+
+        // Xử lý sự kiện đóng modal
+        closeModal.addEventListener("click", () => {
+            console.log("Close modal clicked");
+            addBookModal.style.display = "none";
+        });
+
+        // Xử lý form submit
+        addBookForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            // Lấy dữ liệu từ form
+            const bookId = document.getElementById("bookId").value.trim();
+            const bookTitle = document.getElementById("bookTitle").value.trim();
+            const bookGenres = document.getElementById("bookGenres").value.trim();
+
+            if (!bookId || !bookTitle || !bookGenres) {
+                alert("Please fill out all required fields.");
+                return;
+            }
+
+            console.log("Form data:", { bookId, bookTitle, bookGenres });
+
+            // Giả lập thêm sách thành công
+            alert("Book added successfully!");
+
+            // Reset form và đóng modal
+            e.target.reset();
+            addBookModal.style.display = "none";
+        });
+    });
+</script>
+</body>
 </html>

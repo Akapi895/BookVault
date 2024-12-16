@@ -47,11 +47,12 @@ public class SecurityConfiguration {
                                 "/login",
                                 "/css/**",
                                 "/js/**",
-                                "/media/**",
-                                "/static/**",
-                                "/images/**",
-                                "/favicon.ico").permitAll()
+                                "/media/**\",\n" +
+                                        "                                \"/static/**\",\n" +
+                                        "                                \"/images/**\",\n" +
+                                        "                                \"/favicon.ico").permitAll()
                         .requestMatchers("/books/**", "/user/**", "/chat").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+//                        .requestMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")
                         .requestMatchers("/ws/**", "/app/**").authenticated()
                         .anyRequest().authenticated()
                 )
