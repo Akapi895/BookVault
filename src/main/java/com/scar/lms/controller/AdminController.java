@@ -277,6 +277,27 @@ public class AdminController {
                 });
     }
 
+    @GetMapping("/admin-profile")
+    public CompletableFuture<String> showAdminProfilePage(Model model, Authentication authentication) {
+        if (authentication == null) {
+            return CompletableFuture.completedFuture("redirect:/login");
+        }
+
+        return authenticationService.getAuthenticatedUser(authentication)
+                .thenApply(admin -> {
+                    if (admin == null) {
+                        model.addAttribute("error", "Admin not found or unauthorized.");
+                        return "error/404";
+                    }
+
+                    model.addAttribute("admin", admin);
+                    model.addAttribute("userCount", userService.countAllUsers().join());
+                    model.addAttribute("bookCount", bookService.countAllBooks().join());
+                    model.addAttribute("borrowCount", borrowService.countAllBorrows().join());
+                    return "admin-profile";
+                });
+    }
+
     @PostMapping("/profile/edit")
     public CompletableFuture<String> showEditAdminProfileForm(Authentication authentication, Model model) {
         return authenticationService.getAuthenticatedUser(authentication)

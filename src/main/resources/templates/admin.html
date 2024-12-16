@@ -126,8 +126,8 @@
         </div>
     </section>
     <section style="display:grid; grid-template-columns: 1fr 1fr 2.5fr;" class="display-main">
-        <div>
-            <img th:src="${admin.profilePictureUrl}" alt="Admin Avatar">
+        <div class="img-container">
+            <img th:src="${admin.profilePictureUrl}" alt="Admin Avatar" class="img-avatar">
         </div>
         <div>
             <p><i>Username: </i><br> <span th:text="${admin.username}"></span></p>
