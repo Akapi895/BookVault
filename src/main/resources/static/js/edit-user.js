@@ -60,6 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (userForm) {
         userForm.addEventListener('submit', (e) => {
             e.preventDefault();
+            const submitButton = userForm.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
 
             const userId = document.getElementById('userId').value;
             const username = document.getElementById('Username').value;
@@ -69,7 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
             fetch('/admin/user/update', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Accept': 'text/plain'
                 },
                 body: new URLSearchParams({
                     id: userId,
@@ -78,25 +81,27 @@ document.addEventListener('DOMContentLoaded', () => {
                     role: role
                 })
             })
-                .then(response => {
-                    if (response.ok) {
-                        return response.text();
-                    } else {
-                        return response.text().then(errMessage => {
-                            throw new Error(errMessage);
-                        });
+                .then(async response => {
+                    const text = await response.text();
+                    if (!response.ok) {
+                        throw new Error(text);
                     }
+                    return text;
                 })
                 .then(message => {
                     alert(message);
-                    location.reload();
+                    if (message.includes('successfully')) {
+                        location.reload();
+                    }
                 })
                 .catch(error => {
-                    console.error('Error:', error.message);
-                    alert(`An error occurred: ${error.message}`);
+                    console.error('Error:', error);
+                    alert(error.message || 'Failed to update user');
+                })
+                .finally(() => {
+                    submitButton.disabled = false;
+                    editUserModal.style.display = 'none';
                 });
-
-            editUserModal.style.display = 'none';
         });
     }
 

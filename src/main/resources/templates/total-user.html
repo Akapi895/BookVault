@@ -63,21 +63,31 @@
                 <input type="hidden" id="userId" name="id"/>
 
                 <label for="Username">Username:</label>
-                <input type="text" id="Username" name="username"/>
+                <input type="text" id="Username" name="username" required/>
 
                 <label for="Display-name">Display name:</label>
-                <input type="text" id="Display-name" name="displayName"/>
+                <input type="text" id="Display-name" name="displayName" required
+                       minlength="8" maxlength="50"/>
 
                 <label for="Role">Role:</label>
-                <input type="text" id="Role" name="role"/>
+                <select id="Role" name="role" required>
+                    <option value="USER">USER</option>
+                    <option value="ADMIN">ADMIN</option>
+                </select>
 
                 <div class="button-group">
-                    <button type="submit">Change</button>
+                    <button type="submit">Save Changes</button>
+                    <button type="button" id="closeModal" onclick="closeEditModal()">Cancel</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 <script src="/js/edit-user.js"></script>
+<script>
+    function closeEditModal() {
+        document.getElementById('editUser').style.display = 'none';
+    }
+</script>
 </body>
 </html>

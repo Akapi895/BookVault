@@ -10,6 +10,7 @@ import com.scar.lms.service.UserService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -68,25 +69,6 @@ public class AdminController {
                 });
     }
 
-//    @GetMapping("/books")
-//    public CompletableFuture<String> listAllBooks(Model model) {
-//        return bookService.findAllBooks()
-//                .thenApply(books -> {
-//                    if (books == null) {
-//                        model.addAttribute("error", "Books not found.");
-//                        return "error/404";
-//                    } else {
-//                        model.addAttribute("books", books);
-//                        return "book-list";
-//                    }
-//                })
-//                .exceptionally(e -> {
-//                    log.error("Failed to fetch books.", e);
-//                    model.addAttribute("error", "Failed to fetch books.");
-//                    return "error/404";
-//                });
-//    }
-
     @GetMapping("/total-book")
     public CompletableFuture<String> listAllBooks(Model model) {
         return bookService.findAllBooks()
@@ -141,88 +123,34 @@ public class AdminController {
                 });
     }
 
-//    @PostMapping("/user/update")
-//    public CompletableFuture<ResponseEntity<String>> updateUser(
-//            @Valid @ModelAttribute("user") User user,
-//            BindingResult result) {
-//        if (result.hasErrors()) {
-//            return CompletableFuture.completedFuture(
-//                    ResponseEntity.badRequest().body("Validation failed: " + result.getFieldErrors())
-//            );
-//        }
-//
-//        return userService.findUserById(user.getId())
-//                .thenApply(existingUser -> {
-//                    if (existingUser != null) {
-//                        existingUser.setDisplayName(user.getDisplayName());
-//                        existingUser.setEmail(user.getEmail());
-//
-//                        try {
-//                            existingUser.setRole(user.getRole());
-//                        } catch (IllegalArgumentException e) {
-//                            return ResponseEntity.badRequest().body("Invalid role: " + user.getRole());
-//                        }
-//
-//                        userService.updateUser(existingUser);
-//
-//                        return ResponseEntity.ok("User updated successfully");
-//                    } else {
-//                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
-//                    }
-//                })
-//                .exceptionally(e -> {
-//                    log.error("Failed to update user.", e);
-//                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//                            .body("Failed to update user due to an error");
-//                });
-//    }
-
-    @GetMapping("/admin-profile")
-    public CompletableFuture<String> showAdminProfilePage(Model model, Authentication authentication) {
-        if (authentication == null) {
-            return CompletableFuture.completedFuture("redirect:/login");
-        }
-
-        return authenticationService.getAuthenticatedUser(authentication)
-                .thenApply(admin -> {
-                    if (admin == null) {
-                        model.addAttribute("error", "Admin not found or unauthorized.");
-                        return "error/404";
-                    }
-
-                    model.addAttribute("admin", admin);
-                    model.addAttribute("userCount", userService.countAllUsers().join());
-                    model.addAttribute("bookCount", bookService.countAllBooks().join());
-                    return "admin-profile";
-                });
-    }
-
-    @GetMapping("/")
-
     @PostMapping("/user/update")
+    @ResponseBody
     public CompletableFuture<ResponseEntity<String>> updateUser(
             @RequestParam("id") Integer id,
             @RequestParam("username") String username,
             @RequestParam("displayName") String displayName,
-            @RequestParam("role") String role) {
+            @RequestParam("role") String role,
+            RedirectAttributes redirectAttributes) {
 
         return userService.findUserById(id)
                 .thenApply(existingUser -> {
                     if (existingUser != null) {
-                        // Cập nhật dữ liệu người dùng
-                        existingUser.setUsername(username);
-                        existingUser.setDisplayName(displayName);
                         try {
+                            existingUser.setUsername(username);
+                            existingUser.setDisplayName(displayName);
                             existingUser.setRole(Role.valueOf(role.toUpperCase()));
+                            userService.updateUser(existingUser);
+                            if (role.equalsIgnoreCase("ADMIN")) {
+                                existingUser.setRole(ADMIN);
+                                userService.updateUser(existingUser);
+                                redirectAttributes.addFlashAttribute("successMessage", "Authority granted successfully.");
+                            }
+                            return ResponseEntity.ok("User updated successfully");
                         } catch (IllegalArgumentException e) {
                             return ResponseEntity.badRequest().body("Invalid role: " + role);
                         }
-
-                        userService.updateUser(existingUser);
-                        return ResponseEntity.ok("User updated successfully");
-                    } else {
-                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
                     }
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
                 })
                 .exceptionally(e -> {
                     log.error("Failed to update user.", e);
@@ -231,6 +159,28 @@ public class AdminController {
                 });
     }
 
+//    @PostMapping("/user/grantAuthority/{userId}")
+//    @ResponseBody
+//    public CompletableFuture<ResponseEntity<String>> grantAuthority(@PathVariable int userId, RedirectAttributes redirectAttributes) {
+//        return userService.findUserById(userId)
+//                .thenApply(user -> {
+//                    if (user == null) {
+//                        redirectAttributes.addFlashAttribute("errorMessage", "User not found.");
+//                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+//                    } else {
+//                        user.setRole(ADMIN);
+//                        userService.updateUser(user);
+//                        redirectAttributes.addFlashAttribute("successMessage", "Authority granted successfully.");
+//                        return ResponseEntity.ok("Authority granted successfully");
+//                    }
+//                })
+//                .exceptionally(e -> {
+//                    log.error("Failed to grant authority.", e);
+//                    redirectAttributes.addFlashAttribute("errorMessage", "Failed to grant authority.");
+//                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                            .body("Failed to grant authority due to an error");
+//                });
+//    }
 
     @PostMapping("/user/delete/{userId}")
     public String deleteUser(@PathVariable int userId, RedirectAttributes redirectAttributes) {
@@ -258,9 +208,9 @@ public class AdminController {
     public String deleteBorrow(@PathVariable int borrowId, RedirectAttributes redirectAttributes) {
         try {
             borrowService.removeBorrow(borrowId);
-            redirectAttributes.addFlashAttribute("successMessage", "Book deleted successfully.");
+            redirectAttributes.addFlashAttribute("successMessage", "Borrow record deleted successfully.");
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Failed to delete book.");
+            redirectAttributes.addFlashAttribute("errorMessage", "Failed to delete borrow record.");
         }
         return "redirect:/admin/total-borrow";
     }
@@ -272,26 +222,6 @@ public class AdminController {
         }
         userService.createUser(user);
         return "redirect:/admin/users";
-    }
-
-    @PostMapping("/user/grantAuthority/{userId}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public CompletableFuture<String> grantAuthority(@PathVariable int userId, RedirectAttributes redirectAttributes) {
-        return userService.findUserById(userId)
-                .thenApply(user -> {
-                    if (user == null) {
-                        redirectAttributes.addFlashAttribute("errorMessage", "User not found.");
-                    } else {
-                        user.setRole(ADMIN);
-                        userService.updateUser(user);
-                        redirectAttributes.addFlashAttribute("successMessage", "Authority granted successfully.");
-                    }
-                    return "redirect:/admin/users";
-                })
-                .exceptionally(_ -> {
-                    redirectAttributes.addFlashAttribute("errorMessage", "Failed to grant authority.");
-                    return "redirect:/admin/users";
-                });
     }
 
     @GetMapping({"", "/"})
