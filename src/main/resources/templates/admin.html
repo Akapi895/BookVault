@@ -21,7 +21,7 @@
 <nav>
     <ul class="nav__list">
         <li class="nav__item" data-tooltip="Home">
-            <a href="/books/search">
+            <a href="/admin">
                 <i class='bx bx-home-alt'></i>
             </a>
         </li>
@@ -91,38 +91,29 @@
                     <p class="number" th:text="${bookCount}">30</p>
                     <p class="label">Total books</p>
                 </div>
-                <button class="btn"><a href="/admin/total-book" class="btn">Click</a></button>
+                <button class="btn"><a href="/admin/total-book">Details</a></button>
             </div>
             <div class="card">
                 <div class="content">
                     <p class="number" th:text="${userCount} - ${adminCount}">30</p>
                     <p class="label">Total users</p>
                 </div>
-                <button class="btn"><a href="/admin/users" class="btn">Click</a></button>
+                <button class="btn"><a href="/admin/users">Details</a></button>
             </div>
             <div class="card">
                 <div class="content">
                     <p class="number" th:text="${adminCount}">30</p>
                     <p class="label">Total admin</p>
                 </div>
-                <button class="btn">Click</button>
+<!--                <button class="btn">Details</button>-->
             </div>
             <div class="card">
                 <div class="content">
                     <p class="number" th:text="${borrowCount}">30</p>
                     <p class="label">Total borrow</p>
                 </div>
-                <button class="btn"><a href="/admin/total-borrow" class="btn">Click</a></button>
+                <button class="btn"><a href="/admin/total-borrow">Details</a></button>
             </div>
-            <script>
-                const buttons = document.querySelectorAll('.btn');
-
-                buttons.forEach((button) => {
-                    button.addEventListener('click', () => {
-                        alert('Button clicked!');
-                    });
-                });
-            </script>
         </div>
     </section>
     <section style="display:grid; grid-template-columns: 1fr 1fr 2.5fr;" class="display-main">

@@ -50,7 +50,14 @@
                        th:data-displayname="${user.displayName}"
                        th:data-role="${user.role}"></i>
                 </td>
-                <td style="text-align: center"><i class='bx bxs-trash delete-icon' th:data-id="${user.id}"></i></td>
+                <td style="text-align: center">
+                    <i class='bx bxs-trash delete-icon'
+                       th:data-id="${user.id}"
+                       style="font-size: 16px; color: #ff4444; transition: all 0.3s ease; cursor: pointer;"
+                       onmouseover="this.style.fontSize='18px'"
+                       onmouseout="this.style.fontSize='16px'">
+                    </i>
+                </td>
             </tr>
             </tbody>
         </table>
