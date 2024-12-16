@@ -202,14 +202,32 @@ public class BookController {
         return CompletableFuture.completedFuture("add-book");
     }
 
-    @PostMapping("/add")
-    public CompletableFuture<String> createBook(@Valid @ModelAttribute Book book, BindingResult result, Model model) {
+//    @PostMapping("/add")
+//    public CompletableFuture<String> createBook(@Valid @ModelAttribute Book book, BindingResult result, Model model) {
+//        if (result.hasErrors()) {
+//            model.addAttribute("book", "error");
+//            return CompletableFuture.completedFuture("add-book");
+//        }
+//        return CompletableFuture.runAsync(() -> bookService.addBook(book))
+//                .thenApply(_ -> "redirect:/books");
+//    }
+//    @PostMapping(value = "/add", consumes = "application/json")
+//    public CompletableFuture<ResponseEntity<String>> createBook(@Valid @RequestBody Book book, BindingResult result) {
+//        if (result.hasErrors()) {
+//            return CompletableFuture.completedFuture(ResponseEntity.badRequest().body("Invalid book data"));
+//        }
+//
+//        return CompletableFuture.runAsync(() -> bookService.addBook(book))
+//                .thenApply(_ -> ResponseEntity.ok("Book added successfully"));
+//    }
+
+    @PostMapping("/add") // Phương thức này sẽ có đường dẫn /books/add
+    public CompletableFuture<ResponseEntity<String>> createBook(@Valid @RequestBody Book book, BindingResult result) {
         if (result.hasErrors()) {
-            model.addAttribute("book", "error");
-            return CompletableFuture.completedFuture("add-book");
+            return CompletableFuture.completedFuture(ResponseEntity.badRequest().body("Invalid book data"));
         }
         return CompletableFuture.runAsync(() -> bookService.addBook(book))
-                .thenApply(_ -> "redirect:/books");
+                .thenApply(_ -> ResponseEntity.ok("Book added successfully"));
     }
 
     @GetMapping("/update/{id}")
