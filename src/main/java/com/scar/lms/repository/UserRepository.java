@@ -17,6 +17,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     Optional<User> findByUsername(String username);
 
+//    @Query("SELECT u FROM User u WHERE u.username LIKE %?1%")
+    User findUserByUsername(String username);
+
     Optional<User> findByEmail(String email);
 
     @Query("SELECT u FROM User u WHERE u.email LIKE CONCAT('%', ?1, '@gmail.com')")

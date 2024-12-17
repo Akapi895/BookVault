@@ -50,6 +50,28 @@ public class AdminController {
         this.borrowService = borrowService;
     }
 
+    @GetMapping("/admincheck")
+    public String adminPage(Authentication authentication, Model model) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return "redirect:/login"; // Chuyển hướng nếu chưa đăng nhập
+        }
+
+        // Log ra các quyền của người dùng vào console
+        authentication.getAuthorities().forEach(grantedAuthority -> {
+            System.out.println("User has role: " + grantedAuthority.getAuthority());
+        });
+
+        boolean hasAdminRole = authentication.getAuthorities().stream()
+                .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_ADMIN"));
+
+        if (hasAdminRole) {
+            return "admin"; // Người dùng có quyền admin
+        } else {
+            model.addAttribute("error", "You don't have permission to access this page.");
+            return "error/403"; // Không có quyền truy cập
+        }
+    }
+
     @GetMapping("/users")
     public CompletableFuture<String> listAllUsers(Model model) {
         return userService.findAllUsers()

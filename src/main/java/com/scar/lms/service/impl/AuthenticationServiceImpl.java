@@ -1,5 +1,6 @@
 package com.scar.lms.service.impl;
 
+import com.scar.lms.entity.Role;
 import com.scar.lms.entity.User;
 import com.scar.lms.exception.*;
 import com.scar.lms.repository.UserRepository;
@@ -12,6 +13,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Service;
@@ -56,16 +58,41 @@ public class AuthenticationServiceImpl implements AuthenticationService, UserDet
         }
     }
 
+//    @Override
+//    public UserDetails loadUserByUsername(String username) {
+//        User user = userRepository
+//                .findByUsername(username)
+//                .orElseThrow(() -> new UserNotFoundException("User with username not found: " + username));
+//        return new org.springframework.security.core.userdetails.User(
+//                user.getUsername(),
+//                user.getPassword(),
+//                getAuthorities(user.getUsername())
+//        );
+//    }
     @Override
-    public UserDetails loadUserByUsername(String username) {
-        User user = userRepository
-                .findByUsername(username)
-                .orElseThrow(() -> new UserNotFoundException("User with username not found: " + username));
-        return new org.springframework.security.core.userdetails.User(
-                user.getUsername(),
-                user.getPassword(),
-                getAuthorities(user.getUsername())
-        );
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        // Tìm người dùng trong cơ sở dữ liệu
+        User user = userRepository.findUserByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+
+        // Ánh xạ role từ cơ sở dữ liệu thành ROLE_ prefix
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        System.out.println(user.getRole());
+        if (user.getRole().equals(Role.ADMIN) || user.getRole().ordinal() == 1) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        } else {
+            authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        }
+
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
+    }
+
+    // Hàm này trả về danh sách authorities (quyền của người dùng)
+    private Collection<? extends GrantedAuthority> getAuthorities(User user) {
+        // Chuyển đổi role của user thành GrantedAuthority
+        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
     }
 
     @Override
