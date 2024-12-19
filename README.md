@@ -63,6 +63,7 @@ http://localhost:8080
 - **Quản lý người dùng**: Hỗ trợ phân quyền người dùng (quản trị viên, nhân viên, người dùng).
 - **Thiết kế đáp ứng**: Sử dụng tốt trên máy tính, máy tính bảng và điện thoại.
 - **Bảo mật cơ sở dữ liệu**: Bảo vệ dữ liệu với hệ thống xác thực và mã hóa.
+- **Một số hình ảnh về Web**: User ![Screenshot](./images/a (1).png)
 
 ## Giấy phép
 Dự án này được cấp phép theo giấy phép MIT. Vui lòng xem file `LICENSE` để biết thêm chi tiết.
