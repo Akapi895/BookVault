@@ -1,4 +1,4 @@
-# 📚 **BookVault: Ứng Dụng Quản Lý Đầu Sách**
+# 📚 **BookVault: Ứng Dụng Quản Lý Sách**
 
 ---
 
