@@ -1,71 +1,135 @@
-# **BookVault: Ứng Dụng Quản Lý Đầu Sách**
+# 📚 **BookVault: Ứng Dụng Quản Lý Đầu Sách**
 
-## **Mục Lục**  
+---
+
+## 📖 **Mục Lục**  
 1. [Giới thiệu](#giới-thiệu)  
 2. [Cài đặt và Cách sử dụng](#cài-đặt-và-cách-sử-dụng)  
 3. [Tính năng](#tính-năng)  
- 
+4. [Hình ảnh giao diện](#hình-ảnh-giao-diện)  
+5. [Liên hệ](#liên-hệ)  
 
 ---
 
-## **Giới thiệu**  
-**BookVault** là một ứng dụng web giúp bạn quản lý bộ sưu tập sách một cách hiệu quả. Dành cho thư viện, người yêu sách hoặc bất kỳ ai muốn theo dõi bộ sưu tập ngày càng lớn của mình, BookVault mang đến giải pháp tổ chức và quản lý thông tin sách đơn giản và thuận tiện. 
+## 🌟 **Giới thiệu**  
+**BookVault** là ứng dụng web giúp bạn quản lý bộ sưu tập sách một cách hiệu quả. Phù hợp cho:  
+✅ **Thư viện**  
+✅ **Người yêu sách**  
+✅ **Người quản lý**  
 
-### **Thành viên:**
-   **1.** Phạm Anh Tuấn - MSV: 23021709<br>
-   **2.** Trương Mạnh Khiêm - MSV: 23021601<br>
-   **3.** Trần Chiến Thắng - MSV: 23021725<br>
+Ứng dụng giúp bạn theo dõi và tổ chức thông tin sách dễ dàng, tiện lợi với giao diện thân thiện.
 
-### **Lợi ích:**  
-- Dễ dàng tổ chức sách theo tiêu đề, tác giả, thể loại, và nhiều tiêu chí khác.  
-- Theo dõi tình trạng sách, bao gồm sẵn có hoặc đang mượn.  
-- Tăng năng suất với hệ thống quản lý tập trung.  
+### 👥 **Thành viên phát triển**  
+1. **Phạm Anh Tuấn**     - MSV: 23021709  
+2. **Trương Mạnh Khiêm** - MSV: 23021601  
+3. **Trần Chiến Thắng**  - MSV: 23021725  
 
-### **Mô hình:**  
-![Image 0](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/admin/database.png)
+### 🎯 **Lợi ích của BookVault**  
+- 🗂 **Quản lý sách hiệu quả**: Sắp xếp sách theo thể loại.  
+- 📊 **Tăng năng suất**: Hệ thống quản lý tập trung.  
+- 🔍 **Dễ dàng tìm kiếm**: Theo dõi trạng thái mượn trả nhanh chóng.  
+
+### 🛠 **Mô hình cơ sở dữ liệu**  
+![Mô hình CSDL](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/admin/database.png)
 
 ---
 
-## **Cài đặt và Cách sử dụng**  
-### **Yêu cầu hệ thống**  
-Đảm bảo hệ thống của bạn đã cài đặt:  
-- Java Development Kit (JDK)  
-- Hệ quản trị cơ sở dữ liệu (MySQL Workbench)  
-- IntellIJ 
+## 🚀 **Cài đặt và Cách sử dụng**  
 
-### **Hướng dẫn cài đặt**  
-1. **Clone ứng dụng về máy:**  
+### 💻 **Yêu cầu hệ thống**  
+- **Java Development Kit (JDK)**  
+- **Hệ quản trị cơ sở dữ liệu**: MySQL Workbench  
+- **IDE**: IntelliJ IDEA  
+
+### 🔧 **Hướng dẫn cài đặt**  
+
+1. **Clone ứng dụng về máy**  
    ```bash
    git clone https://github.com/Akapi895/BookVault
+   
+2. **Thiết lập cơ sở dữ liệu**
+- **Bước 1:** Tạo Schemas mới trong MySQL Workbench tên 'lms'.
+- **Bước 2:** Import file SQL:
+   ```css
+   File -> Open SQL Script...  
+   Chọn file `lms.sql` trong folder `database`.  
+   Chạy toàn bộ đoạn lệnh SQL.
+   ```
+- **Bước 3:** Cấu hình MySQL trong file 'application.properties' trong thư mục 'resources':
+  ```properties
+  spring.datasource.username=your_username  
+  spring.datasource.password=your_password
+  
+3. **Khởi chạy ứng dụng**
+- Mở folder BookVault bằng IntelliJ IDEA
+- Chạy file LmsApplication.java
 
-2. **Thiết lập cơ sở dữ liệu:**
-a. Tạo Schemas mới tên "lms" trong MySQL Workbench -> File -> Open SQL Script... -> Chọn file lms.sql trong folder database của dự án -> Chọn Schemas 'lms' -> chạy toàn bộ đoạn lệnh SQL từ file lms.sql<br>
-b. Cấu hình các thông tin về MySQL Connections trong file `application.properties`. (username:..., password:...)<br>
-
-3. **Truy cập ứng dụng web:**
-a. Mở folder BookVault trong IntellIJ và chạy LmsApplication.java<br>
-b. Mở trình duyệt và truy cập địa chỉ:
-```
+4. **Truy cập ứng dụng**
+Mở trình duyệt và truy cập:
+```ardruino
 http://localhost:8080
 ```
 
-### Tính năng
-- **Quản lý danh mục sách**: Thêm, sửa, xóa thông tin sách.
-- **Tìm kiếm và Lọc**: Dễ dàng tìm sách qua từ khóa, thể loại, tác giả hoặc trạng thái.
-- **Quản lý người dùng**: Hỗ trợ phân quyền người dùng (quản trị viên, nhân viên, người dùng).
-- **Thiết kế đáp ứng**: Sử dụng tốt trên máy tính, máy tính bảng và điện thoại.
-- **Bảo mật cơ sở dữ liệu**: Bảo vệ dữ liệu với hệ thống xác thực và mã hóa.
-- **Một số hình ảnh về Web**:
-  - **User**:
-![Image 1](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/1.png)
-![Image 3](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/3.png)
-![Image 6](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/6.png)
-![Image 10](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/10.png)
+---
+## ⚙️ **Tính năng**  
 
-  - **Admin**:
-    ![Image 1](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/admin/1.png)
-    ![Image 2](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/admin/2.png)
-    ![Image 3](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/admin/3.png)
-  
+### 📑 **1. Quản lý danh mục sách**  
+- Thêm, xóa thông tin sách.  
+- Lưu trữ thông tin chi tiết như **tiêu đề**, **tác giả**, **thể loại**, và **năm xuất bản**.  
 
-Cảm ơn bạn đã sử dụng BookVault!
+### 🔍 **2. Tìm kiếm và lọc**  
+- Tìm kiếm sách nhanh chóng theo:  
+  - **Từ khóa** (tiêu đề, tác giả).  
+  - **Thể loại**.  
+  - **Năm xuất bản**.  
+
+### 👥 **3. Quản lý người dùng**  
+- **Admin**:  
+  - Thêm, chỉnh sửa và xóa sách.
+  - Tìm kiếm sách thông qua **Google Books API**.
+  - Quản lý thông tin người dùng (thêm, xóa, chỉnh sửa).
+  - Theo dõi tình trạng sách: sách đang mượn, sách đã trả và lịch sử mượn sách.
+ - **User**:
+  - **Mượn sách**: Người dùng có thể tìm kiếm và mượn sách một cách dễ dàng.
+  - **Đánh giá và bình luận**: Đưa ra đánh giá và bình luận cho từng đầu sách.
+  - **Quản lý thông tin cá nhân**: Chỉnh sửa hồ sơ và xem lịch sử mượn trả sách.
+  - **Sách yêu thích**: Thêm sách vào danh mục yêu thích để dễ dàng theo dõi.
+
+### 📱 **4. Giao diện thân thiện và đáp ứng**  
+- Thiết kế tương thích với mọi thiết bị: **máy tính**, **máy tính bảng**.
+- Tối ưu hóa trải nghiệm người dùng với bố cục đơn giản và dễ thao tác.
+
+### 🔒 **5. Bảo mật cao**  
+- **Xác thực người dùng**: Bảo mật thông tin qua hệ thống xác thực.
+- **Phân quyền người dùng**: Phân quyền rõ ràng giữa Admin và User.
+- **Mã hóa dữ liệu**: Thông tin nhạy cảm được mã hóa đảm bảo an toàn.
+- **Spring Security**: Tích hợp bảo mật ở cấp độ ứng dụng. 
+
+### 🎮 **6. Tính năng bổ sung**
+- **Game**: Trò chơi vui nhộn giúp người dùng thử tài với các gợi ý tên sách.
+- **Google Books API**: Tìm kiếm thông tin sách mở rộng qua Google Books API và nhập sách mới vào hệ thống.
+- **Spring Security**: Bảo mật hệ thống với tính năng xác thực và phân quyền người dùng.
+- **OAuth2 Authentication**: Cho phép người dùng đăng nhập thông qua tài khoản Google hoặc GitHub.
+- **Spring Websocket**: Tính năng chat thời gian thực giữa người dùng với nhau.
+- **Spring Async**: Tích hợp đa luồng để tối ưu hóa hiệu năng và trải nghiệm mượt mà hơn.
+- **Google Cloud Storage API**: Lưu trữ và quản lý hình ảnh sách trên Google Cloud Storage. Đường dẫn hình ảnh được lưu trữ trong cơ sở dữ liệu.
+
+---
+
+## 🖼 **Hình ảnh giao diện**  
+
+### 👤 **Giao diện Người dùng (User)**  
+
+
+### 🔐 **Giao diện Quản trị viên (Admin)**  
+
+---
+## 🎯 **Hướng phát triển trong tương lai**  
+- Bổ sung tính năng **thống kê báo cáo**: số lượng sách mượn trả, sách yêu thích.
+- Đào tạo mô hình AI để hỗ trợ người đọc.  
+- Phát triển tính năng **gửi thông báo mượn/trả sách** qua email.  
+- Nâng cấp giao diện với trải nghiệm người dùng tốt hơn.  
+
+---
+
+Cảm ơn bạn đã sử dụng **BookVault**! 🚀
