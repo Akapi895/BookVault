@@ -82,7 +82,7 @@ http://localhost:8080
     ![Image 3](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/admin/3.png)
     ![Image 4](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/admin/4.png)
     ![Image 5](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/admin/5.png)
-    ![Image 6](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/admin/6.png)
+
 
 ## Giấy phép
 Dự án này được cấp phép theo giấy phép MIT. Vui lòng xem file `LICENSE` để biết thêm chi tiết.
