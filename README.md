@@ -12,7 +12,7 @@
 **BookVault** là một ứng dụng web giúp bạn quản lý bộ sưu tập sách một cách hiệu quả. Dành cho thư viện, người yêu sách hoặc bất kỳ ai muốn theo dõi bộ sưu tập ngày càng lớn của mình, BookVault mang đến giải pháp tổ chức và quản lý thông tin sách đơn giản và thuận tiện. 
 
 ### **Thành viên:**
-   **1.** Phạm Anh Tuấn - MSV:  
+   **1.** Phạm Anh Tuấn - MSV: 23021709
    **2.** Trương Mạnh Khiêm - MSV: 23021601  
    **3.** Trần Chiến Thắng - MSV: 23021725
 
@@ -67,23 +67,16 @@ http://localhost:8080
 - **Một số hình ảnh về Web**:
   - **User**:
 ![Image 1](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/1.png)
-![Image 2](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/2.png)
 ![Image 3](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/3.png)
 ![Image 4](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/4.png)
 ![Image 5](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/5.png)
 ![Image 6](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/6.png)
-![Image 7](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/7.png)
-![Image 8](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/8.png)
-![Image 9](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/9.png)
 ![Image 10](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/10.png)
-![Image 11](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/11.png)
+
   - **Admin**:
     ![Image 1](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/admin/1.png)
     ![Image 2](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/admin/2.png)
     ![Image 3](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/admin/3.png)
-    ![Image 4](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/admin/4.png)
-    ![Image 5](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/admin/5.png)
-
-
+  
 
 Cảm ơn bạn đã sử dụng BookVault!
