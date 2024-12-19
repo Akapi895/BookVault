@@ -69,7 +69,6 @@ http://localhost:8080
 ![Image 1](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/1.png)
 ![Image 3](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/3.png)
 ![Image 4](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/4.png)
-![Image 5](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/5.png)
 ![Image 6](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/6.png)
 ![Image 10](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/10.png)
 
