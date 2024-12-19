@@ -106,6 +106,14 @@ public class UserServiceImpl implements UserService {
 
     @Async
     @Override
+    public User findUserWithUsername(String username) {
+        return userRepository
+                .findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException("User with username not found: " + username));
+    }
+
+    @Async
+    @Override
     public void addFavouriteFor(User user, int bookId) {
         User persistedUser = userRepository.findByUsername(user.getUsername())
                 .orElseThrow(() -> new OperationNotAllowedException("Cannot add favourite for user not found: " + user.getUsername()));

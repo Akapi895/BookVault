@@ -21,6 +21,46 @@
 </head>
 
 <body>
+<!--<header class="headpage">-->
+<!--    <ul class="navmenu">-->
+<!--        <li><a href="/books">HOME</a></li>-->
+<!--        <li><a href="#">GENRES&nbsp;<i class='bx bxs-down-arrow' style="transform: scale(0.7);"></i></a>-->
+<!--            <ul class="drop-down">-->
+<!--                <li><a href="#comics">Comics</a></li>-->
+<!--                <li><a href="#romantic">Romantic</a></li>-->
+<!--                <li><a href="#novels">Novels</a></li>-->
+<!--                <li><a href="#action">Action</a></li>-->
+<!--                <li><a href="#literature">Literature</a></li>-->
+<!--                <li><a href="#technology">Technology</a></li>-->
+<!--            </ul>-->
+<!--        </li>-->
+<!--        <li><a href="/users/favourites">FAVORITE</a></li>-->
+<!--        <li><a href="/game">GAME</a></li>-->
+
+<!--        <li id="adminRole"><a href="/admin">ADMIN</a></li>-->
+<!--        <li id="adminapiRole"><a href="/books/api">API</a></li>-->
+<!--        <li id="userRole" style="display: none;"><span th:text="${user.role}"></span></li>-->
+<!--    </ul>-->
+<!--    <ul class="navmenu">-->
+<!--        <li style="width: 260px">-->
+<!--            <form action="/books/search" method="get">-->
+<!--                <input-->
+<!--                        type="text"-->
+<!--                        style="padding-left: 10px; font-size: 14px;"-->
+<!--                        id="searchBook"-->
+<!--                        name="title"-->
+<!--                        placeholder="Search books..."-->
+<!--                >-->
+<!--                <button type="submit">-->
+<!--                    <i class='bx bx-search' style="transform: scale(1.5);"></i>-->
+<!--                </button>-->
+<!--            </form>-->
+<!--        </li>-->
+<!--        <li style="position: relative; height: 100%; margin-top: 8px; padding-left: 0;">-->
+<!--            <a href="/users/profile"><i class='bx bx-user-circle' style="transform: scale(1.5);"></i></a>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</header>-->
 <div th:replace="~{frame :: body}"></div>
 
 <div class="container">
@@ -123,6 +163,27 @@
 </div>
 
 <script src="/js/profile_calendar.js"></script>
+<li id="userRole" style="display: none;"><span th:text="${user.role}"></span></li>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const adminMenuItem = document.getElementById("adminRole");
+        const adminApiMenuItem = document.getElementById("adminapiRole");
+        const userRole = document.getElementById("userRole");
 
+        if (!adminMenuItem || !adminApiMenuItem || !userRole) {
+            console.error("One or more elements not found. Check IDs in HTML.");
+            return;
+        }
+
+        // Lấy nội dung của userRole
+        const roleText = userRole.textContent.trim();
+
+        // Hiển thị adminMenuItem và adminApiMenuItem chỉ khi role là ADMIN
+        if (roleText !== "ADMIN") {
+            adminMenuItem.style.display = "none";
+            adminApiMenuItem.style.display = "none";
+        }
+    });
+</script>
 </body>
 </html>

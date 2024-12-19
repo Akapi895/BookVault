@@ -251,6 +251,7 @@ public class UserController {
                 .thenCompose(user -> borrowService.findBorrowsOfUser(user.getId())
                         .thenApply(borrowHistory -> {
                             model.addAttribute("borrowHistory", borrowHistory);
+//                            model.addAttribute("user", user);
                             return "history";
                         })
                 );

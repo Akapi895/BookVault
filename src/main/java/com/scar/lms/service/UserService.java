@@ -17,6 +17,8 @@ public interface UserService {
 
     CompletableFuture<User> findUserByUsername(String username);
 
+    User findUserWithUsername(String username);
+
     CompletableFuture<User> findUserByEmail(String email);
 
     void createUser(User user);

@@ -162,6 +162,29 @@
         button.addEventListener('click', () => window.history.back());
     });
 </script>
+<li id="userRole" style="display: none;"><span th:text="${user.role}"></span></li>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const adminMenuItem = document.getElementById("adminRole");
+        const adminApiMenuItem = document.getElementById("adminapiRole");
+        const userRole = document.getElementById("userRole");
+
+        if (!adminMenuItem || !adminApiMenuItem || !userRole) {
+            console.error("One or more elements not found. Check IDs in HTML.");
+            return;
+        }
+
+        // Lấy nội dung của userRole
+        const roleText = userRole.textContent.trim();
+
+        // Hiển thị adminMenuItem và adminApiMenuItem chỉ khi role là ADMIN
+        if (roleText !== "ADMIN") {
+            adminMenuItem.style.display = "none";
+            adminApiMenuItem.style.display = "none";
+        }
+    });
+</script>
+
 <script>
     document.getElementById('edit-profile-form').addEventListener('submit', function(e) {
         e.preventDefault();
