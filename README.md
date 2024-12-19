@@ -44,6 +44,9 @@
 - username: admintest
 - password: 123456789
 
+#### Lưu ý:
+Vì lí do bản quyền nên nhóm em không thể push OpenAI API Key lên github, thầy có thể liên hệ bạn nhóm trưởng để có thể test tính năng gọi đến openAI ạ.
+
 ### 💻 **Yêu cầu hệ thống**  
 - **Java Development Kit (JDK)**  
 - **Hệ quản trị cơ sở dữ liệu**: MySQL Workbench  
