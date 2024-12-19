@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library Management System</title>
+    <title>Book Vault</title>
 
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/chat.css">
@@ -19,9 +19,9 @@
 <body>
     <header>
         <ul class="navmenu">
-            <li><a href="/home">HOME</a></li>
-            <li><a href="#">ABOUT</a></li>
-            <li><a href="#">CONTACT</a></li>
+            <li><a href="#home">HOME</a></li>
+            <li><a href="#about">ABOUT</a></li>
+            <li><a href="#contact">CONTACT</a></li>
         </ul>
         <ul class="navmenu">
             <li><a href="/login" class="text-register">LOG IN</a></li>
@@ -29,14 +29,14 @@
         </ul>
     </header>
 
-    <section class="main-home container">
+    <section id="home" class="main-home container">
         <div class="video-background">
         <video autoplay loop muted playsinline>
             <source src="/media/video/home.mp4" type="video/mp4">
         </video>
         </div>
         <div class="main-text box1">
-            <h1>LIBRARY <br> MANAGEMENT <br> SYSTEM </h1>
+            <h1>BOOK VAULT <br> LIBRARY <br> MANAGEMENT <br> SYSTEM </h1>
 
             <a href="/login" class="main-btn">Log in<i class='bx bx-right-arrow-alt'></i></a>
         </div>
@@ -51,7 +51,7 @@
     </section>
 
     <section>
-        <div class="about-me-container">
+        <div id="about" class="about-me-container">
             <div class="about-me-box">
                 <div class="about-me-content">
                     <h style="font-size: 5rem">About Me</h>
@@ -77,7 +77,7 @@
                             <ul  style="list-style-type:circle;">
                                 <li>Add new books</li>
                                 <li>Delete books</li>
-                                <li>Edit book information</li>
+<!--                                <li>Edit book information</li>-->
                                 <li>Search for books in the library</li>
                                 <li>Search for books using the Google Books API</li>
                                 <li>View book lists</li>
@@ -124,18 +124,18 @@
         </div>
     </section>
     <section>
-        <div class="contact-container">
-            <div class="contact-item">
-                <img src="/media/image/avt1.jpg" alt="Creator 1" class="contact-icon">
-                <p>Minh Tran<br> phone: 012 345 6666<br> Mail: mt@gmail.com</p>
+        <div id="contact" class="contact-container">
+            <div class="contact-item" style="width: 70%">
+                <img src="/media/image/avtMain.jpg" alt="Creator 1" class="contact-icon">
+                <p>LEADER<br>Phạm Anh Tuấn<br>  phone: 035 410 9318<br> Mail: pipatrix@gmail.com</p>
             </div>
-            <div class="contact-item">
+            <div class="contact-item" style="width: 50%">
                 <img src="/media/image/avt2.jpeg" alt="Creator 2" class="contact-icon">
-                <p>Tam Ngo <br> phone: 0375 603 357<br> Mail: tngo@gmail.com</p>
+                <p><br>Trương Mạnh Khiêm <br> phone: 0375 603 357<br> Mail: khiemm@gmail.com</p>
             </div>
-            <div class="contact-item">
+            <div class="contact-item" style="width: 50%">
                 <img src="/media/image/avt3.jpg" alt="Creator 3" class="contact-icon">
-                <p>San <br> phone: 091 870 8888<br> Mail: san@gmail.com</p>
+                <p><br>Trần Chiến Thắng <br> phone: 091 870 8888<br> Mail: tct@gmail.com</p>
             </div>
         </div>
     </section>
