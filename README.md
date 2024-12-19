@@ -65,7 +65,7 @@ http://localhost:8080
 - **Bảo mật cơ sở dữ liệu**: Bảo vệ dữ liệu với hệ thống xác thực và mã hóa.
 - **Một số hình ảnh về Web**:
 - **User**:
-![Image 1](./user/1.png)
+![Image 1](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/1.png)
 ![Image 2](./user/2.png)
 ![Image 3](./user/3.png)
 ![Image 4](./user/4.png)
