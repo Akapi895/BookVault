@@ -64,7 +64,7 @@ http://localhost:8080
 - **Thiết kế đáp ứng**: Sử dụng tốt trên máy tính, máy tính bảng và điện thoại.
 - **Bảo mật cơ sở dữ liệu**: Bảo vệ dữ liệu với hệ thống xác thực và mã hóa.
 - **Một số hình ảnh về Web**:
-        + User:
+  - **User**:
 ![Image 1](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/1.png)
 ![Image 2](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/2.png)
 ![Image 3](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/3.png)
@@ -76,6 +76,13 @@ http://localhost:8080
 ![Image 9](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/9.png)
 ![Image 10](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/10.png)
 ![Image 11](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/user/11.png)
+  - **Admin**:
+    ![Image 1](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/admin/1.png)
+    ![Image 2](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/admin/2.png)
+    ![Image 3](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/admin/3.png)
+    ![Image 4](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/admin/4.png)
+    ![Image 5](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/admin/5.png)
+    ![Image 6](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/admin/6.png)
 
 ## Giấy phép
 Dự án này được cấp phép theo giấy phép MIT. Vui lòng xem file `LICENSE` để biết thêm chi tiết.
