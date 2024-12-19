@@ -36,6 +36,14 @@
 
 ## 🚀 **Cài đặt và Cách sử dụng**  
 
+### Tài khoản demo
+1. User:
+- username: usertest
+- password: 123456789
+2. Admin:
+- username: admintest
+- password: 123456789
+
 ### 💻 **Yêu cầu hệ thống**  
 - **Java Development Kit (JDK)**  
 - **Hệ quản trị cơ sở dữ liệu**: MySQL Workbench  
@@ -117,11 +125,14 @@ http://localhost:8080
 ---
 
 ## 🖼 **Hình ảnh giao diện**  
+### **Giao diện khi chưa đăng nhập**
+![notlogin](https://github.com/user-attachments/assets/de896766-b72d-40d3-9c69-c19b90810d5b)
 
 ### 👤 **Giao diện Người dùng (User)**  
-
+![user](https://github.com/user-attachments/assets/e602bcd8-073a-436e-846f-014daf70803c)
 
 ### 🔐 **Giao diện Quản trị viên (Admin)**  
+![admin](https://github.com/user-attachments/assets/2bde4839-a70c-4009-abe3-3fa602b98efc)
 
 ---
 ## 🎯 **Hướng phát triển trong tương lai**  
