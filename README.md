@@ -4,14 +4,14 @@
 
 ## 📖 **Mục Lục**  
 1. [Giới thiệu](#gioi-thieu)  
-2. [Cài đặt và Cách sử dụng](#cài-đặt-và-cách-sử-dụng)  
-3. [Tính năng](#tính-năng)  
-4. [Hình ảnh giao diện](#hình-ảnh-giao-diện)  
-5. [Hướng phát triển](#hướng-phát-triển)  
+2. [Cài đặt và Cách sử dụng](#cai-dat-va-cach-su-dung)  
+3. [Tính năng](#tinh-nang)  
+4. [Hình ảnh giao diện](#hinh-anh-giao-dien)  
+5. [Hướng phát triển](#huong-phat-trien)  
 
 ---
 <a id="gioi-thieu"></a>
-## 🌟 **Gioi thieu**
+## 🌟 **Giới thiệu**
 **BookVault** là ứng dụng web giúp bạn quản lý bộ sưu tập sách một cách hiệu quả. Phù hợp cho:  
 ✅ **Thư viện**  
 ✅ **Người yêu sách**  
@@ -33,7 +33,7 @@
 ![Mô hình CSDL](https://github.com/Akapi895/CSDL17/blob/main/asset/frontend/admin/database.png)
 
 ---
-
+<a id="cai-dat-va-cach-su-dung"></a>
 ## 🚀 **Cài đặt và Cách sử dụng**  
 
 ### Tài khoản demo
@@ -80,8 +80,8 @@ Mở trình duyệt và truy cập:
 ```ardruino
 http://localhost:8080
 ```
-
 ---
+<a id="tinh-nang"></a>
 ## ⚙️ **Tính năng**  
 
 ### 📑 **1. Quản lý danh mục sách**  
@@ -126,7 +126,7 @@ http://localhost:8080
 - **Google Cloud Storage API**: Lưu trữ và quản lý hình ảnh sách trên Google Cloud Storage. Đường dẫn hình ảnh được lưu trữ trong cơ sở dữ liệu.
 
 ---
-
+<a id="hinh-anh-giao-dien"></a>
 ## 🖼 **Hình ảnh giao diện**  
 ### **Giao diện khi chưa đăng nhập**
 ![notlogin](https://github.com/user-attachments/assets/de896766-b72d-40d3-9c69-c19b90810d5b)
@@ -138,6 +138,7 @@ http://localhost:8080
 ![admin](https://github.com/user-attachments/assets/2bde4839-a70c-4009-abe3-3fa602b98efc)
 
 ---
+<a id="huong-phat-trien"></a>
 ## 🎯 **Hướng phát triển trong tương lai**  
 - Bổ sung tính năng **thống kê báo cáo**: số lượng sách mượn trả, sách yêu thích.
 - Đào tạo mô hình AI để hỗ trợ người đọc.  
