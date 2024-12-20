@@ -7,11 +7,11 @@
 2. [Cài đặt và Cách sử dụng](#cài-đặt-và-cách-sử-dụng)  
 3. [Tính năng](#tính-năng)  
 4. [Hình ảnh giao diện](#hình-ảnh-giao-diện)  
-5. [Liên hệ](#liên-hệ)  
+5. [Hướng phát triển](#hướng-phát-triển)  
 
 ---
 
-## 🌟 **Giới thiệu**  
+## 🌟 **Giới thiệu**
 **BookVault** là ứng dụng web giúp bạn quản lý bộ sưu tập sách một cách hiệu quả. Phù hợp cho:  
 ✅ **Thư viện**  
 ✅ **Người yêu sách**  
