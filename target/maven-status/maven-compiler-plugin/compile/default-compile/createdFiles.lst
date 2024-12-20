@@ -15,6 +15,7 @@ com\scar\lms\entity\Borrow.class
 com\scar\lms\service\impl\NotificationServiceImpl.class
 com\scar\lms\config\WebConfig.class
 com\scar\lms\exception\handler\CustomAsyncExceptionHandler.class
+com\scar\lms\model\NotificationDTO$NotificationDTOBuilder.class
 com\scar\lms\service\impl\GoogleBooksServiceImpl.class
 com\scar\lms\LmsApplication.class
 com\scar\lms\model\NotificationDTO.class
@@ -34,6 +35,7 @@ com\scar\lms\entity\Notification.class
 com\scar\lms\service\GitHubOAuth2Service.class
 com\scar\lms\controller\BookController.class
 com\scar\lms\exception\UserNotFoundException.class
+com\scar\lms\model\ChatMessageDTO$ChatMessageDTOBuilder.class
 com\scar\lms\model\ChatMessageDTO.class
 com\scar\lms\repository\NotifyRepository.class
 com\scar\lms\config\GoogleBooksApiProperties.class
