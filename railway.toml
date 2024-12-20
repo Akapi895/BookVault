@@ -1,5 +1,0 @@
-[build]
-dockerfile = "Dockerfile"
-
-[service]
-start = "java -jar lms-0.0.1-SNAPSHOT.jar"
