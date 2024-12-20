@@ -11,7 +11,7 @@
 
 ---
 
-## 🌟 **Giới thiệu**
+## 🌟 **Gioi thieu**
 **BookVault** là ứng dụng web giúp bạn quản lý bộ sưu tập sách một cách hiệu quả. Phù hợp cho:  
 ✅ **Thư viện**  
 ✅ **Người yêu sách**  
