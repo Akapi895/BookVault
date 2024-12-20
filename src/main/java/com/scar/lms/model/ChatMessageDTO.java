@@ -21,4 +21,34 @@ public class ChatMessageDTO {
         CHAT, JOIN, LEAVE
     }
 
+    public void setContent(String content) {
+        this.content = content;
+    }
+    public void setSender(String sender) {
+        this.sender = sender;
+    }
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+    public void setProfilePictureUrl(String profilePictureUrl) {
+        this.profilePictureUrl = profilePictureUrl;
+    }
+    public void setType(MessageType type) {
+        this.type = type;
+    }
+    public String getContent() {
+        return content;
+    }
+    public String getSender() {
+        return sender;
+    }
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+    public String getProfilePictureUrl() {
+        return profilePictureUrl;
+    }
+    public MessageType getType() {
+        return type;
+    }
 }

@@ -96,7 +96,7 @@ public class GameController {
             model.addAttribute("points", points);
             model.addAttribute("remainingGuesses", remainingGuesses);
         } catch (Exception e) {
-            log.error("Failed to load game data.", e);
+//            log.error("Failed to load game data.", e);
             model.addAttribute("error", "Failed to load game data.");
         }
 
@@ -188,7 +188,7 @@ public class GameController {
             }
 
         } catch (Exception e) {
-            log.error("An unexpected error occurred while handling the guess.", e);
+//            log.error("An unexpected error occurred while handling the guess.", e);
             model.addAttribute("error", "An unexpected error occurred. Please try again.");
         }
 

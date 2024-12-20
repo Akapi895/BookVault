@@ -45,4 +45,40 @@ public class Notification {
     public final int hashCode() {
         return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
+
+    // Getter and Setter for id
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    // Getter and Setter for content
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    // Getter and Setter for sendTime
+    public LocalDateTime getSendTime() {
+        return sendTime;
+    }
+
+    public void setSendTime(LocalDateTime sendTime) {
+        this.sendTime = sendTime;
+    }
+
+    // Getter and Setter for notifies
+    public Set<Notify> getNotifies() {
+        return notifies;
+    }
+
+    public void setNotifies(Set<Notify> notifies) {
+        this.notifies = notifies;
+    }
 }

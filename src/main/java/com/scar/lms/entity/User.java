@@ -49,20 +49,44 @@ public class User {
     @OneToMany(fetch = FetchType.EAGER,
             mappedBy = "user")
     private Set<Borrow> borrows = new HashSet<>();
+    public Set<Borrow> getBorrows() {
+        return borrows;
+    }
+    public void setBorrows(Set<Borrow> borrows) {
+        this.borrows = borrows;
+    }
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "FAVOURITES",
             joinColumns = { @JoinColumn(name = "USER_ID") },
             inverseJoinColumns = { @JoinColumn(name = "BOOK_ID") })
     private Set<Book> favouriteBooks = new HashSet<>();
+    public Set<Book> getFavouriteBooks() {
+        return favouriteBooks;
+    }
+    public void setFavouriteBooks(Set<Book> favouriteBooks) {
+        this.favouriteBooks = favouriteBooks;
+    }
 
     @OneToMany(fetch = FetchType.EAGER,
             mappedBy = "user")
     private Set<Notify> notifies = new HashSet<>();
+    public Set<Notify> getNotifys() {
+        return notifies;
+    }
+    public void setNotifys(Set<Notify> notifies) {
+        this.notifies = notifies;
+    }
 
     @OneToMany(fetch = FetchType.EAGER,
             mappedBy = "user")
     private Set<Rating> ratings = new HashSet<>();
+    public Set<Rating> getRatings() {
+        return ratings;
+    }
+    public void setRatings(Set<Rating> ratings) {
+        this.ratings = ratings;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -77,5 +101,77 @@ public class User {
         return this instanceof HibernateProxy
                 ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode()
                 : getClass().hashCode();
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public long getPoints() {
+        return points;
+    }
+
+    public void setPoints(long points) {
+        this.points = points;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getProfilePictureUrl() {
+        return profilePictureUrl;
+    }
+
+    public void setProfilePictureUrl(String profilePictureUrl) {
+        this.profilePictureUrl = profilePictureUrl;
+    }
+
+    public String getAboutMe() {
+        return aboutMe;
+    }
+
+    public void setAboutMe(String aboutMe) {
+        this.aboutMe = aboutMe;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

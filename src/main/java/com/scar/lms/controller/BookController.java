@@ -68,7 +68,7 @@ public class BookController {
             model.addAttribute("query", query);
             return "api";
         }).exceptionally(ex -> {
-            log.error("Failed to fetch books", ex);
+//            log.error("Failed to fetch books", ex);
             model.addAttribute("error", "Unable to fetch books. Please try again later.");
             return "api";
         });
@@ -114,7 +114,7 @@ public class BookController {
                         model.addAttribute("top", topBorrowedBooksFuture.get());
                         model.addAttribute("count", totalBooksFuture.get());
                     } catch (Exception e) {
-                        log.error("Failed to load data: {}", e.getMessage());
+//                        log.error("Failed to load data: {}", e.getMessage());
                         model.addAttribute("error", "Failed to load data");
                     }
                     return "book-search";
@@ -132,7 +132,7 @@ public class BookController {
                 model.addAttribute("books", futureBooks.get());
                 model.addAttribute("tops", futureTops.get());
             } catch (Exception ex) {
-                log.error("Error occurred while fetching books: {}", ex.getMessage());
+//                log.error("Error occurred while fetching books: {}", ex.getMessage());
                 model.addAttribute("error", "Failed to fetch books. Please try again later.");
             }
             return "book-list";
@@ -158,7 +158,7 @@ public class BookController {
                     return "book";
                 })
                 .exceptionally(e -> {
-                    log.error("Failed to load book details", e);
+//                    log.error("Failed to load book details", e);
                     model.addAttribute("error", "Unable to load book details at the moment.");
                     return "error";
                 });
@@ -191,7 +191,7 @@ public class BookController {
                     return ResponseEntity.ok(ratingDto);
                 })
                 .exceptionally(e -> {
-                    log.error("Failed to rate book", e);
+//                    log.error("Failed to rate book", e);
                     return ResponseEntity.badRequest().body(null);
                 });
     }
@@ -242,7 +242,7 @@ public class BookController {
                     }
                 })
                 .exceptionally(e -> {
-                    log.error("Failed to load book", e);
+//                    log.error("Failed to load book", e);
                     return "redirect:/error?message=Failed+to+load+book";
                 });
     }
@@ -280,7 +280,7 @@ public class BookController {
         return CompletableFuture.runAsync(() -> bookService.addBook(book))
                 .thenApply(_ -> ResponseEntity.ok("Book added successfully"))
                 .exceptionally(e -> {
-                    log.error("Failed to add book", e);
+//                    log.error("Failed to add book", e);
                     return ResponseEntity.badRequest().body("Failed to add book");
                 });
     }
@@ -299,7 +299,7 @@ public class BookController {
                     return ResponseEntity.ok("Book borrowed successfully");
                 })
                 .exceptionally(e -> {
-                    log.error("Failed to borrow book", e);
+//                    log.error("Failed to borrow book", e);
                     return ResponseEntity.badRequest().body("Failed to borrow book");
                 });
     }
@@ -328,7 +328,7 @@ public class BookController {
                     return ResponseEntity.ok("Book returned successfully");
                 })
                 .exceptionally(e -> {
-                    log.error("Failed to return book", e);
+//                    log.error("Failed to return book", e);
                     return ResponseEntity.badRequest().body("Failed to return book");
                 });
     }
@@ -348,7 +348,7 @@ public class BookController {
                     return ResponseEntity.ok("Book added to favourites");
                 })
                 .exceptionally(e -> {
-                    log.error("Failed to add favourite", e);
+//                    log.error("Failed to add favourite", e);
                     return ResponseEntity.badRequest().body("Failed to add favourite");
                 });
     }
@@ -368,7 +368,7 @@ public class BookController {
                     return ResponseEntity.ok("Book removed from favourites");
                 })
                 .exceptionally(e -> {
-                    log.error("Failed to remove favourite", e);
+//                    log.error("Failed to remove favourite", e);
                     return ResponseEntity.badRequest().body("Failed to remove favourite");
                 });
     }

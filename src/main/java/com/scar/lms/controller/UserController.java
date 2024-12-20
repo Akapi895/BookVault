@@ -60,7 +60,7 @@ public class UserController {
                         return extractedUploadProfileImage(user.getId(), file, model)
                                 .thenApply(_ -> "redirect:/users/profile/edit");
                     } catch (IOException e) {
-                        log.error("Error uploading profile image.", e);
+//                        log.error("Error uploading profile image.", e);
                         model.addAttribute("message", "Error uploading profile image: " + e.getMessage());
                         return CompletableFuture.completedFuture("redirect:/users/profile/edit");
                     }
@@ -80,7 +80,7 @@ public class UserController {
                     model.addAttribute("user", user);
                     return CompletableFuture.completedFuture(null);
                 } catch (IOException e) {
-                    log.error("Error uploading profile image.", e);
+//                    log.error("Error uploading profile image.", e);
                     model.addAttribute("message", "Error uploading profile image: " + e.getMessage());
                     return CompletableFuture.completedFuture(null);
                 }
@@ -151,13 +151,13 @@ public class UserController {
                         userService.updateUser(currentUser);
                         return ResponseEntity.ok("Profile updated successfully");
                     } catch (Exception e) {
-                        log.error("Error updating user: {}", e.getMessage(), e);
+//                        log.error("Error updating user: {}", e.getMessage(), e);
                         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                                 .body(e.getMessage());
                     }
                 })
                 .exceptionally(e -> {
-                    log.error("Failed to update profile: {}", e.getMessage(), e);
+//                    log.error("Failed to update profile: {}", e.getMessage(), e);
                     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                             .body("Server error occurred");
                 });
@@ -176,7 +176,7 @@ public class UserController {
                 model.addAttribute("success", "Password updated successfully.");
             }
         } catch (Exception e) {
-            log.error("Failed to update password.", e);
+//            log.error("Failed to update password.", e);
             model.addAttribute("error", "Failed to update password.");
         }
         return "redirect:/users/profile/edit";

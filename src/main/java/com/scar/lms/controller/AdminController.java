@@ -85,7 +85,7 @@ public class AdminController {
                     }
                 })
                 .exceptionally(e -> {
-                    log.error("Failed to fetch users.", e);
+//                    log.error("Failed to fetch users.", e);
                     model.addAttribute("error", "Failed to fetch users.");
                     return "error/404";
                 });
@@ -103,7 +103,7 @@ public class AdminController {
                     return "total-book";
                 })
                 .exceptionally(e -> {
-                    log.error("Failed to fetch books.", e);
+//                    log.error("Failed to fetch books.", e);
                     model.addAttribute("error", "Failed to fetch books.");
                     return "error/404";
                 });
@@ -121,7 +121,7 @@ public class AdminController {
                     return "total-borrow";
                 })
                 .exceptionally(e -> {
-                    log.error("Failed to fetch borrows.", e);
+//                    log.error("Failed to fetch borrows.", e);
                     model.addAttribute("error", "Failed to fetch borrows.");
                     return "error/404";
                 });
@@ -139,7 +139,7 @@ public class AdminController {
                     return "user-list";
                 })
                 .exceptionally(e -> {
-                    log.error("Failed to search users.", e);
+//                    log.error("Failed to search users.", e);
                     model.addAttribute("error", "Failed to search users.");
                     return "error/404";
                 });
@@ -175,7 +175,7 @@ public class AdminController {
                     return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
                 })
                 .exceptionally(e -> {
-                    log.error("Failed to update user.", e);
+//                    log.error("Failed to update user.", e);
                     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                             .body("Failed to update user due to an error");
                 });
@@ -290,7 +290,7 @@ public class AdminController {
                                 model.addAttribute("borrowCountMonth" + i, borrowCountMonthFutures.get(i - 1).get());
                             }
                         } catch (Exception e) {
-                            log.error("Error fetching admin profile data", e);
+//                            log.error("Error fetching admin profile data", e);
                             model.addAttribute("error", "Failed to load admin profile data.");
                             return "error/500";
                         }

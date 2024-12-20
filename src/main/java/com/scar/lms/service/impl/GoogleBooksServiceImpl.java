@@ -92,10 +92,10 @@ public class GoogleBooksServiceImpl implements GoogleBooksService {
             }
             return CompletableFuture.completedFuture(books);
         } catch (JsonProcessingException e) {
-            log.error("Error parsing JSON response from Google Books API", e);
+//            log.error("Error parsing JSON response from Google Books API", e);
             return CompletableFuture.completedFuture(Collections.emptyList());
         } catch (Exception e) {
-            log.error("Error calling Google Books API", e);
+//            log.error("Error calling Google Books API", e);
             return CompletableFuture.completedFuture(Collections.emptyList());
         }
     }

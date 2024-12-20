@@ -21,20 +21,52 @@ public class Borrow {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Column(name = "BORROW_DATE", nullable = false)
     @NonNull
     private LocalDate borrowDate;
 
+    public LocalDate getBorrowDate() {
+        return borrowDate;
+    }
+    public void setBorrowDate(LocalDate borrowDate) {
+        this.borrowDate = borrowDate;
+    }
+
     @Column(name = "RETURN_DATE")
     private LocalDate returnDate;
+    public LocalDate getReturnDate() {
+        return returnDate;
+    }
+    public void setReturnDate(LocalDate returnDate) {
+        this.returnDate = returnDate;
+    }
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID")
     private User user;
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "BOOK_ID")
     private Book book;
+    public Book getBook() {
+        return book;
+    }
+    public void setBook(Book book) {
+        this.book = book;
+    }
 
     @Override
     public boolean equals(Object o) {

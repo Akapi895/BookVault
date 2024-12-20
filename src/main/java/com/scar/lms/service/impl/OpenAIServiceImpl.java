@@ -46,7 +46,7 @@ public class OpenAIServiceImpl implements OpenAIService {
         try {
             return getChatResponseCompletableFuture(restTemplate, entity);
         } catch (Exception e) {
-            log.error("Error processing OpenAI response", e);
+//            log.error("Error processing OpenAI response", e);
             return CompletableFuture.completedFuture("Error processing OpenAI response");
         }
     }
