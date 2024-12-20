@@ -9,8 +9,8 @@ import java.util.Date;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+//@NoArgsConstructor
+//@AllArgsConstructor
 public class RatingDTO {
 
     private String username;
