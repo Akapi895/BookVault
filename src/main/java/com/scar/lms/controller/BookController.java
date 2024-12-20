@@ -98,7 +98,7 @@ public class BookController {
         CompletableFuture<Long> totalBooksFuture = bookService.countAllBooks();
 
         return CompletableFuture.allOf(booksFuture, topBorrowedBooksFuture, totalBooksFuture)
-                .thenApply(_ -> {
+                .thenApply(result -> {
                     try {
                         Page<Book> bookPage = booksFuture.get();
                         model.addAttribute("books", bookPage.getContent());
@@ -127,7 +127,7 @@ public class BookController {
         CompletableFuture<List<Book>> futureTops = bookService.findTopBorrowedBooks();
 
         return CompletableFuture.allOf(
-                futureBooks, futureTops).thenApplyAsync(_ -> {
+                futureBooks, futureTops).thenApplyAsync(result -> {
             try {
                 model.addAttribute("books", futureBooks.get());
                 model.addAttribute("tops", futureTops.get());
@@ -173,7 +173,7 @@ public class BookController {
         CompletableFuture<Book> bookFuture = bookService.findBookById(bookId);
 
         return CompletableFuture.allOf(userFuture, bookFuture)
-                .thenApply(_ -> {
+                .thenApply(result -> {
                     User user = userFuture.join();
                     Book book = bookFuture.join();
 
@@ -209,7 +209,7 @@ public class BookController {
 //            return CompletableFuture.completedFuture("add-book");
 //        }
 //        return CompletableFuture.runAsync(() -> bookService.addBook(book))
-//                .thenApply(_ -> "redirect:/books");
+//                .thenApply(result -> "redirect:/books");
 //    }
 //    @PostMapping(value = "/add", consumes = "application/json")
 //    public CompletableFuture<ResponseEntity<String>> createBook(@Valid @RequestBody Book book, BindingResult result) {
@@ -218,7 +218,7 @@ public class BookController {
 //        }
 //
 //        return CompletableFuture.runAsync(() -> bookService.addBook(book))
-//                .thenApply(_ -> ResponseEntity.ok("Book added successfully"));
+//                .thenApply(result -> ResponseEntity.ok("Book added successfully"));
 //    }
 
     @PostMapping("/add") // Phương thức này sẽ có đường dẫn /books/add
@@ -227,7 +227,7 @@ public class BookController {
             return CompletableFuture.completedFuture(ResponseEntity.badRequest().body("Invalid book data"));
         }
         return CompletableFuture.runAsync(() -> bookService.addBook(book))
-                .thenApply(_ -> ResponseEntity.ok("Book added successfully"));
+                .thenApply(response -> ResponseEntity.ok("Book added successfully"));
     }
 
     @GetMapping("/update/{id}")
@@ -256,13 +256,13 @@ public class BookController {
         }
         book.setId(id);
         return CompletableFuture.runAsync(() -> bookService.updateBook(book))
-                .thenApply(_ -> "redirect:/books");
+                .thenApply(response -> "redirect:/books");
     }
 
     @DeleteMapping("/remove/{id}")
     public CompletableFuture<String> deleteBook(@PathVariable("id") int id) {
         return CompletableFuture.runAsync(() -> bookService.deleteBook(id))
-                .thenApply(_ -> "redirect:/books");
+                .thenApply(result -> "redirect:/books");
     }
 
     private void extractedBorrowBook(User user, Book book) throws OperationNotAllowedException {
@@ -278,7 +278,7 @@ public class BookController {
     @PostMapping("/add/db")
     public CompletableFuture<ResponseEntity<String>> addBookToDatabase(@Valid @ModelAttribute Book book) {
         return CompletableFuture.runAsync(() -> bookService.addBook(book))
-                .thenApply(_ -> ResponseEntity.ok("Book added successfully"))
+                .thenApply(result -> ResponseEntity.ok("Book added successfully"))
                 .exceptionally(e -> {
 //                    log.error("Failed to add book", e);
                     return ResponseEntity.badRequest().body("Failed to add book");
@@ -291,7 +291,7 @@ public class BookController {
         CompletableFuture<Book> bookFuture = bookService.findBookById(bookId);
 
         return CompletableFuture.allOf(userFuture, bookFuture)
-                .thenApply(_ -> {
+                .thenApply(result -> {
                     User user = userFuture.join();
                     Book book = bookFuture.join();
 
@@ -310,7 +310,7 @@ public class BookController {
         CompletableFuture<Book> bookFuture = bookService.findBookById(bookId);
 
         return CompletableFuture.allOf(userFuture, bookFuture)
-                .thenApply(_ -> {
+                .thenApply(result -> {
                     User user = userFuture.join();
                     Book book = bookFuture.join();
 
@@ -339,7 +339,7 @@ public class BookController {
         CompletableFuture<Book> bookFuture = bookService.findBookById(bookId);
 
         return CompletableFuture.allOf(userFuture, bookFuture)
-                .thenApply(_ -> {
+                .thenApply(result -> {
                     User user = userFuture.join();
                     Book book = bookFuture.join();
 
@@ -359,7 +359,7 @@ public class BookController {
         CompletableFuture<Book> bookFuture = bookService.findBookById(bookId);
 
         return CompletableFuture.allOf(userFuture, bookFuture)
-                .thenApply(_ -> {
+                .thenApply(result -> {
                     User user = userFuture.join();
                     Book book = bookFuture.join();
 

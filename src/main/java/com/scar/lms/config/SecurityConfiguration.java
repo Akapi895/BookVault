@@ -79,7 +79,7 @@ public class SecurityConfiguration {
 
     @Bean
     public AuthenticationFailureHandler loginFailureHandler() {
-        return (request, response, _) -> {
+        return (request, response, handler) -> {
             request.getSession().setAttribute("error", "Incorrect username or password");
             response.sendRedirect("/login?error=true");
         };
@@ -87,7 +87,7 @@ public class SecurityConfiguration {
 
     @Bean
     public LogoutSuccessHandler userLogoutSuccessHandler() {
-        return (_, response, authentication) -> {
+        return (request, response, authentication) -> {
             response.sendRedirect("/login?logout=true");
             if (authentication != null) {
                 System.out.printf("User %s logged out%n", authentication.getName());
@@ -121,7 +121,7 @@ public class SecurityConfiguration {
     }
 
     private AuthenticationSuccessHandler getAuthenticationSuccessHandler() {
-        return (_, response, authentication) -> {
+        return (request, response, authentication) -> {
             Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
             if (roles.contains("ROLE_ADMIN")) {
                 response.sendRedirect("/admin");

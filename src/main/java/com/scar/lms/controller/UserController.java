@@ -58,7 +58,7 @@ public class UserController {
                 .thenCompose(user -> {
                     try {
                         return extractedUploadProfileImage(user.getId(), file, model)
-                                .thenApply(_ -> "redirect:/users/profile/edit");
+                                .thenApply(result -> "redirect:/users/profile/edit");
                     } catch (IOException e) {
 //                        log.error("Error uploading profile image.", e);
                         model.addAttribute("message", "Error uploading profile image: " + e.getMessage());
@@ -214,7 +214,7 @@ public class UserController {
                             model.addAttribute("borrowedBooks", borrowedBooks);
                             return "borrowed-books";
                         })
-                        .exceptionally(_ -> {
+                        .exceptionally(result -> {
                             model.addAttribute("error", "Failed to fetch borrowed books.");
                             return "error/404";
                         })
@@ -229,7 +229,7 @@ public class UserController {
                             model.addAttribute("books", favouriteBooks);
                             return "favourites";
                         })
-                        .exceptionally(_ -> {
+                        .exceptionally(result -> {
                             model.addAttribute("error", "Failed to fetch favourite books.");
                             return "error/404";
                         })

@@ -279,7 +279,7 @@ public class AdminController {
 
                     CompletableFuture<Void> allOfFutures = CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
 
-                    return allOfFutures.thenApply(_ -> {
+                    return allOfFutures.thenApply(result -> {
                         try {
                             model.addAttribute("adminCount", adminCountFuture.get());
                             model.addAttribute("userCount", userCountFuture.get());
