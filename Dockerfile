@@ -17,7 +17,7 @@ RUN ./mvnw clean package -DskipTests
 ARG JAR_FILE=target/lms-0.0.1-SNAPSHOT.jar
 
 # Copy file JAR build vao image cuoi cung
-COPY ${JAR_FILE} app.jar
+COPY ${JAR_FILE} lms-0.0.1-SNAPSHOT.jar
 
 # Cau hinh cong
 EXPOSE 8080
